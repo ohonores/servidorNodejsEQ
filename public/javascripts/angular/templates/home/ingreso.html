@@ -1,0 +1,26 @@
+<div class="col-xs-12 col-sm-9">
+
+    <div class="jumbotron ocultarimagen" style="background:none !important;">
+        <!-- <img style="width:100%;height:auto;" src="cabecera/salud-farma.jpg"  >-->
+        </br></br>
+        <hr>
+        <div ui-view="centroPagina" ></div>
+        <hr>
+    </div>
+    <div class="row ocultarimagen" ng-show="formDatosVirtual.formularioB" id="recuperacionClave">
+        <h5>Recuperación de Clave.</h5>
+    </div><!--/row-->
+    <div class="row ocultarimagen" ng-show="formDatosVirtual.formularioD">
+        <h5 >Asistente Virtual.</h5>
+    </div><!--/row-->
+</div><!--/.col-xs-12.col-sm-9-->
+
+<div class="col-sm-3 " id="sidebar">
+    <div class="cover-container">
+        <div class="row" >
+            k
+            <div ui-view ></div>
+        </div>
+        </br>
+    </div><!--cover-container-->
+</div><!--col-xs-6 col-sm-3-->
