@@ -49,8 +49,21 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/recursos',express.static(path.join(__dirname, 'bower_components')));
+var session  = require('express-session');
+/***********
+	CONFIGURACION DE REDIS, SI NO TIENE LA BASE DE REDIS POR FAVOR COMENTAR HASTA "FIN REDIS"
+*************/
+var client = require("redis").createClient(6379,'192.168.2.207');
+var redisStore = require('connect-redis')(session);
+/*********FIN REDIS**************/
 
+app.use('/recursos',express.static(path.join(__dirname, 'bower_components')));
+app.use(session({
+    secret: 'ssshhhhh',
+    store: new redisStore({ host: '192.168.2.207', port: 6379,prefix:'edi', client: client,ttl :  260}),
+    saveUninitialized: false,
+    resave: false
+}));
 app.use('/', routes);
 app.use('/users', users);
 
