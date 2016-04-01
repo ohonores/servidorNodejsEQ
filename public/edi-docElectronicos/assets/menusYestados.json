@@ -1,151 +1,24 @@
-{"todos":
-	{
-	"menusPrincipal":[
-	  					{
-						  	"nombre":"Documentos",
-							"estado":true,
-							"icono":"icon-folder-close-alt",
-						  	"seleccionado":true,
-					  		"codigo":"10"
-						},
-						{
-						  	"nombre":"Productos Consumidos",
-							"estado":true,
-							"icono":"icon-shopping-cart",
-							"seleccionado":false,
-						  	"codigo":"40"
-						},
-						{
-						  	"nombre":"Impuestos Retenidos",
-							"estado":true,
-							"icono":"icon-suitcase",
-							"seleccionado":false,
-							"codigo":
-							"90"
-						},
-						{
-						  	"nombre":"Mis datos",
-							"estado":true,
-							"icono":"icon-user",
-							"seleccionado":false,
-						  	"codigo":"50"
-						},
-	  					{
-						  	"nombre":"Soperte en l\u00EDnea",
-							"estado":true,
-							"icono":"icon-male",
-							"seleccionado":false,
-							"codigo":"80"
-						},
-	  					{
-						  	"nombre":"Configuraci\u00F3n",
-							"estado":true,
-							"icono":"icon-cog",
-							"seleccionado":false,
-							"codigo":"70",
-							"submenu":[
-										{
-										  	"nombre":"Web Service",
-										  	"estado":true,
-										  	"icono":"icon-cloud-upload",
-										  	"seleccionado":false,
-										  	"url":"/administracion-edi"
-										},
-							  			{
-										  	"nombre":"Usuarios conectados",
-										  	"estado":true,
-										  	"icono":"icon-male",
-										  	"seleccionado":false,
-										  	"url":"/usuarios-conectados"
-										},
-							  			{
-										  	"nombre":"Robots",
-										  	"estado":true,
-										  	"icono":"icon-group",
-										  	"seleccionado":false,
-										  	"url":"/administracion-robots/ingresar"
-										},
-										{
-										  	"nombre":"Notificaciones",
-										  	"estado":true,
-										  	"icono":"icon-refresh",
-										  	"seleccionado":false,
-										  	"submenunoti":
-											true
-										}
-									]
-						},
-						{
-						  	"nombre":"Subir archivo",
-							"estado":true,
-							"icono":"icon-file",
-						  	"seleccionado":false,
-							"codigo":"100"
-						}
-					],
-	"tipoIdentificaconTabla7Sri" :
-					[
-						{"nombre":"RUC","valor":"04"},
-						{"nombre":"CEDULA","valor":"05"},
-						{"nombre":"PASAPORTE","valor":"06"},
-						{"nombre":"VENTA A CONSUMIDOR FINAL","valor":"07"},
-						{"nombre":"IDENTIFICACION DEL EXTERIOR","valor":"08"},
-						{"nombre":"PLACA","valor":"09"}
-					],
-	
-	"emisionSri" : 	[
-					{"nombre":"Normal ","valor":"1"},
-					{"nombre":"Indisponibilidad del Sistema","valor":"2"}
-					],
-	"ambienteSri" : [
-					{"nombre":"Pruebas","valor":"1"},
-					{"nombre":"Producci\u00F3n","valor":"2"}
-				],
-	"impuestoTabla17Sri" :  [
-							{"nombre":"IVA","valor":"2"},
-							{"nombre":"ICE","valor":"3"},
-							{"nombre":"IRBPNR","valor":"5"}
-						],
-	"tarifaDelIvaTabla18Sri"=  [
-							{"nombre":"0%","valor":"0"},
-							{"nombre":"12%","valor":"2"},
-							{"nombre":"No objeto de Impuesto","valor":"6"},
-							{"nombre":"Exento de Iva","valor":"7"}
-							],
-	"estados" : [
-				{"codigo":"B","detalle":"RECIBIDO POR EDI","selected":"d"},
-				{"codigo":"E","detalle":"ENVIADO AL SRI","selected":"d"},
-				{"codigo":"R","detalle":"RECIBIDO POR EL SRI","selected":"d"},
-				{"codigo":"A","detalle":"AUTORIZADO POR EL SRI","selected":"selected"},
-				{"codigo":"N","detalle":"NO AUTORIZADO POR SRI","selected":"d"},
-				{"codigo":"D","detalle":"DEVUELTA POR EL SRI","selected":"d"},
-				{"codigo":"G","detalle":"CONTINGENCIA","selected":"d"},
-				{"codigo":"X","detalle":"ANULADA POR EDI","selected":"d"},
-				{"codigo":"P","detalle":"PENDIENTE AUTORIZACION","selected":"d"},
-				{"codigo":"C","detalle":"NO CONEX. CON EL SRI","selected":"d"},
-				{"codigo":"S","detalle":"NO CONEX. SRI XML ENV. ","selected":"d"},
-				{"codigo":"O","detalle":"ANULADA EN AMB. PRODUCCION","selected":"d"}
-			],
-	"estados_bitacora" : {"B":"RECIBIDO POR EDI",
-						"E":"ENVIADO AL SRI",
-						"R":"RECIBIDO POR EL SRI",
-						"A":"AUTORIZADO POR EL SRI",
-						"N":"NO AUTORIZADO POR SRI",
-						"D":"DEVUELTA POR EL SRI",
-						"G":"CONTINGENCIA",
-						"X":"ANULADA POR EDI",
-						"P":"PENDIENTE AUTORIZACION",
-						"C":"NO CONEX. CON EL SRI",
-						"S":"NO CONEX. SRI XML ENV. ",
-						"O":"ANULADA EN AMB. PRODUCCION"},	
-	"labelsReferencia":
-					{
-					"1":"Gu\u00EDa de remisi\u00F3n",
-					"2":"Tipo Doc/N\u00FAmero/Fecha de sustento",
-					"3":"Tipo Doc/N\u00EDmero/Fecha de sustento",
-					"4":"Destinatario/Direcci\u00F3n/Tipo Doc/Numero/Fecha de sustento",
-					"5":"Codigo Imp./Documento/Fecha de sustento"
-					}
-		
-	}		
-}
+{"columnasTablaMov" : [
+{"nombre":"Id","estado":true,"pantallapequenia":false,"edi":false,"admin":true,"detalle":"&#160,Id del registro."},
+{"nombre":"Emisi\u00F3n","estado":false,"pantallapequenia":false,"edi":false,"admin":true,"detalle":" Fecha de emisi&oacute,n del documento."},
+{"nombre":"Procesado","estado":true,"pantallapequenia":false,"edi":true,"admin":true,"detalle":"&#160,Fecha en la que fue procesado en el sistema SwisSEdi."},
+{"nombre":"Raz\u00F3n Social","estado":true,"pantallapequenia":false,"edi":false,"admin":true,"detalle":"&#160,Raz&oacute,n Social del Cliente/Proveedor."},
+{"nombre":"Documento","estado":false,"pantallapequenia":false,"edi":true,"admin":true,"detalle":"&#160,Tipo de documento electr&oacute,nico."},
+{"nombre":"Comprobante","estado":true,"pantallapequenia":false,"edi":true,"admin":true,"detalle":"&#160,N&uacute,mero del documento elect&oacute,nico."},
+{"nombre":"Referencia","estado":false,"pantallapequenia":false,"edi":true,"admin":true,"detalle":"&#160,Referencia o N&uacute,mero del documento de sustento."},
+{"nombre":"Clave Acceso y Autorizaci\u00F3n","estado":false,"pantallapequenia":false,"edi":true,"admin":true,"detalle":"&#160,Est&aacute,n separadas por un enter respectivamente"},
+{"nombre":"Clave Acceso","estado":false,"pantallapequenia":false,"edi":true,"admin":true,"detalle":"Clave de acceso para poder bajar en excel,csv"},
+{"nombre":"Autorizaci\u00F3n","estado":false,"pantallapequenia":false,"edi":true,"admin":true,"detalle":"Autorizaci\u00F3n para poder bajar en excel,csv"},
+{"nombre":"SubTotal","estado":true,"pantallapequenia":false,"edi":true,"admin":true,"detalle":"Base Imponible e Impuesto."},
+{"nombre":"Iva 12%","estado":true,"pantallapequenia":false,"edi":true,"admin":true,"detalle":"Iva 12%."},
+{"nombre":"Descuentos","estado":true,"pantallapequenia":false,"edi":true,"admin":true,"detalle":"&#160,Descuentos que se han otorgado."},
+{"nombre":"Propina","estado":false,"pantallapequenia":false,"edi":true,"admin":true,"detalle":"&#160,Propina que se ha recibido."},
+{"nombre":"Total","estado":true,"pantallapequenia":false,"edi":true,"admin":true,"detalle":"&#160,Valor total del documento electr&oacute,nico."},
+{"nombre":"Xml","estado":false,"pantallapequenia":false,"edi":true,"admin":true,"detalle":"&#160,Xml Autorizado por el SRI."},
+{"nombre":"Ride","estado":false,"pantallapequenia":false,"edi":true,"admin":true,"detalle":"&#160,Representaci&oacute,n Impresa del Documento Electr&oacute,nico."},
+{"nombre":"Crear-Ride","estado":true,"pantallapequenia":false,"edi":true,"admin":true,"detalle":"&#160,Permite crear nuevamente el RIDE."},
+{"nombre":"Enviar-Email.","estado":true,"pantallapequenia":false,"edi":true,"admin":true,"detalle":"&#160,Permite enviar nuevamente el email con el ride y xml."},
+{"nombre":"Xml Origen","estado":false,"pantallapequenia":false,"edi":false,"admin":true,"detalle":"&#160,Permite bajar el xml origen sin firmar."},
+{"nombre":"Xml Firmado","estado":false,"pantallapequenia":false,"edi":false,"admin":true,"detalle":"&#160,Permite bajar el xml firmado, el que fue enviado al SRI."},
+{"nombre":"estado","estado":true,"pantallapequenia":false,"edi":true,"admin":true}
+]}

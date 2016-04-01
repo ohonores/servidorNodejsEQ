@@ -497,6 +497,7 @@ ServletWS.prototype.procesarRobotEmailsInvalidos = function(objson,respuesta){
 
 
 ServletWS.prototype.getImagenCaptcha = function (propiedad, ipaddress, res){
+    console.log("getImagenCaptcha");
 	 var header={
 	'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
 	'Accept-Encoding':'gzip, deflate, sdch',

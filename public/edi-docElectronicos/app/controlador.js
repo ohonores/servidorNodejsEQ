@@ -1,7 +1,7 @@
 angular.module('electronicos.controllers', ['ngSanitize'])
 
 .controller('EmpresasCrtl',["$scope",'empresasFactory', function($scope,empresasFactory) {
-    console.log("EmpresasCrtl")
+  console.log("EmpresasCrtl")
   $scope.empresasCache = [];
   empresasFactory.getAllEmpresas(false).then(function(res){
       //console.log(res)
@@ -19,7 +19,7 @@ angular.module('electronicos.controllers', ['ngSanitize'])
 }])
 .controller('LoginCtrl',['$scope','$window','$http','loginFactory', function($scope, $window, $http, loginFactory){
     $scope.imagenResetFormulario = function(){
-      $scope.imagenCaptcha = "/public/sesion-usuario/imagen/"+Math.floor((Math.random() * 100) + 1);
+      $scope.imagenCaptcha = "/sesion-usuario/imagen/"+Math.floor((Math.random() * 100) + 1);
       console.log("$scope.imagenCaptchaA");
       console.log($scope.imagenCaptcha);
     }
@@ -47,7 +47,7 @@ angular.module('electronicos.controllers', ['ngSanitize'])
 
 						$scope.formDatosVirtual = {};
 						$window.notificar("Usuario ha ingresado al sistema con éxito","success",$window.socket);
-						$window.location.href='/movimientos-eq';
+						$window.location.href='/ver/movimientos';
 
 					}else{
 

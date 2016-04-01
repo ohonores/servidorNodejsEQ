@@ -34,6 +34,7 @@ ClientePG.prototype.getPoolClienteConexion = function (sql, parametros, resultad
 				// return the client to the connection pool for other requests to reuse
 				done();
 				if(err) {
+
 					if(err.code && err.code ==="23505"){
 						//console.log(err.datail);
 					}else{
@@ -444,6 +445,8 @@ ClientePG.prototype.getEmpresas  = function(respuesta){
     	var valores=[];
     	var columnasBusqueda=[];
     	var i=1;
+		console.log("parametros.busqueda")
+
 		for(var key in parametros.busqueda){
 			columnasBusqueda.push(key + " = $"+i);
 			valores.push(parametros.busqueda[key]);
@@ -451,26 +454,54 @@ ClientePG.prototype.getEmpresas  = function(respuesta){
 		}
     	var sql = "SELECT #columnas FROM #tabla  WHERE #parametrosBusqueda   #Paginacion #Fecha #Oderby #Limit ";
 		sql	 = sql.replace("#columnas",parametros.columnas).
+
 				replace("#tabla",parametros.tabla).
 				replace("#parametrosBusqueda",columnasBusqueda.join(" AND ")).
 				replace("#Paginacion",	parametros.paginacion &&
-										parametros.paginacion.prevDate &&
 										parametros.paginacion.prevId &&
-										parametros.paginacion.prevDateV &&
 										parametros.paginacion.prevIdV
-										?" AND ("+parametros.paginacion.prevId+" ) < ("+parametros.paginacion.prevIdV+")" :"").
+										?" AND ("+parametros.paginacion.prevId+" ) "+parametros.paginacion.avanzar+" ("+parametros.paginacion.prevIdV+")" :"").
 				replace("#Fecha", parametros.fecha && parametros.fecha.campo && parametros.fecha.inicio && parametros.fecha.fin ? " AND  "+parametros.fecha.campo+ " BETWEEN "+parametros.fecha.inicio+" AND  "+parametros.fecha.fin  :"" ).
 				replace("#Oderby",parametros.orderby ? "Order by  "+parametros.orderby:"").
 				replace("#Limit",parametros.limite ? "limit "+parametros.limite:"");
-		console.log(sql)
-    	this.getPoolClienteConexion(sql,valores, function(resultado){
-    		respuesta(resultado.rows);
+		console.log(sql);
+		console.log(parametros.busqueda)
+		this.getPoolClienteConexion(sql, valores, function(resultado){
+			respuesta(resultado.rows);
 		});
+
+
 	};
+	ClientePG.prototype.consultarTotalRegistrosDinamicamente= function(parametros, respuesta){
+		console.log("consultarRegistrosDinamicamente")
+		var valores=[];
+		var columnasBusqueda=[];
+		var i=1;
+		console.log("parametros.busqueda")
+		console.log(parametros.busqueda)
+		for(var key in parametros.busqueda){
+			columnasBusqueda.push(key + " = $"+i);
+			valores.push(parametros.busqueda[key]);
+			i++;
+		}
+		var sqlTotal = "SELECT count(*) as total FROM #tabla  WHERE #parametrosBusqueda   #Paginacion #Fecha ";
+		sqlTotal	 = sqlTotal.replace("#columnas",parametros.columnas).
+				replace("#tabla",parametros.tabla).
+				replace("#parametrosBusqueda",columnasBusqueda.join(" AND ")).
+				replace("#Paginacion",	parametros.paginacion &&
+										parametros.paginacion.prevId &&
+										parametros.paginacion.prevIdV
+										?" AND ("+parametros.paginacion.prevId+" ) "+parametros.paginacion.avanzar+" ("+parametros.paginacion.prevIdV+")" :"").
+				replace("#Fecha", parametros.fecha && parametros.fecha.campo && parametros.fecha.inicio && parametros.fecha.fin ? " AND  "+parametros.fecha.campo+ " BETWEEN "+parametros.fecha.inicio+" AND  "+parametros.fecha.fin  :"" );
+				console.log(sqlTotal);
+		this.getPoolClienteConexion(sqlTotal, valores, function(resultado){
+			console.log('postgres consultarTotalRegistrosDinamicamente');
+			console.log(resultado);
+			respuesta((resultado && resultado.rows && resultado.rows[0] && resultado.rows[0].total) ?  resultado.rows[0].total :0 );
+		});
 
-
-
-		ClientePG.prototype.consultarEmpresas = function(respuesta){
+	};
+	ClientePG.prototype.consultarEmpresas = function(respuesta){
 			var query = "SELECT ruc||' '||descripcion||' '||codigo as query,ruc,id,descripcion,codigo,mensaje,urllogo, true as mostrar FROM swissedi.eeditempresa  ";
 		    this.getPoolClienteConexion(query, null, function(resultado){
 						if(resultado){

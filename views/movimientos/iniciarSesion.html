@@ -1,0 +1,31 @@
+<html style="overflow: hidden; height: 100%; border: medium none; padding: 0px; margin: 0px;" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>SwisSystem :: Ruta protegida</title>
+<script type="text/javascript">
+    var mensajeExtra = <%- JSON.stringify(mensajeExtra) %>;
+</script>
+</head>
+<body>
+    <header>
+        <br>
+        <center><img src="/images/logo/logo_swiss_header.png" ></center>
+    </header>
+    <center>
+        <br>
+        <h3><span style="color:#848080">Estmado usuario su sesión ha expirado, <a href="/" style="text-decoration:none">por favor ingrese nuevamente al sistema</a></span></h3>
+        <br>
+        <h3><span style="color:#848080" id="mensajeExtra"></span></h3>
+    <center>
+    <footer>
+    </footer>
+    <script type="text/javascript">
+        try{
+            document.getElementById("mensajeExtra").innerHTML = mensajeExtra;
+        }catch(error){
+            console.log(error);
+        }
+
+    </script>
+</body>
+</html>

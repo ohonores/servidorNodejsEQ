@@ -3,22 +3,32 @@ angular.module('uiRouterDocElectronicos.services', [
 ])
 
 	// A RESTful factory para obtener variables a partir del archivo 'menusYestados.json'
-	.factory('menusYestados', ['$http', 'utils', function ($http, utils) {
-	  var path = 'assets/menusYestados.json';
-	  var menusYestados = $http.get(path).then(function (resp) {
-		return resp.data.todos;
-	  });
+	.factory('menusDcoumentosEstados', ['$http', '$window', function ($http, $window) {
+	  	var pathMenus = '/ver/menus/:perfil';
+		var pathDocumentos = '/ver/documentos/:perfil';
+	    var menusDcoumentosEstados = {};
+		menusDcoumentosEstados.getMenus = function(callBack) {
+			if($window.usuario && $window.usuario.perfil){
+				$http.get(pathMenus.replace(":perfil", $window.usuario.perfil)).then(function (resp) {
+					callBack(resp.data);
+				});
+			}else{
+				callBack([]);
+			}
 
-	  var menusYestados = {};
-	  menusYestados.all = function () {
-		return todos;
-	  };
-	  menusYestados.get = function (id) {
-		return todos.then(function(){
-		  return utils.findByKey(todos, id);
-		})
-	  };
-	  return menusYestados;
+	  	};
+		menusDcoumentosEstados.getDocumentos = function(callBack) {
+			if($window.usuario && $window.usuario.perfil){
+				$http.get(pathDocumentos.replace(":perfil",$window.usuario.perfil)).then(function (resp) {
+					callBack(resp.data);
+				});
+			}else{
+				callBack([]);
+			}
+
+		}
+
+	  	return menusDcoumentosEstados;
 	}])
 
 	/*****
@@ -57,12 +67,12 @@ angular.module('uiRouterDocElectronicos.services', [
 	RESTful factory:
 	Cliente Proveedor
 	****************/
-	.factory('clienteProveedorFactory', ['$http', 'utils', function ($http, utils) {
-		var urlBase = '/cliente-proveedor/:prefijo/';
+	.factory('clienteProveedorFactory', ['$http', function ($http) {
+		var urlBase = '/ver/consultar/cliente-proveedor/id/:prefijo';
 		var clienteProveedorFactory = {};
+		clienteProveedorFactory.getClienteProveedor = function (id) {
 
-		clienteProveedorFactory.getClienteProveedor = function (busqueda, prefijo) {
-			return $http.get(urlBase.replace(':prefijo',prefijo) + '/busqueda/' + JSON.stringify(busqueda));
+			return $http.get(urlBase.replace(':prefijo',id) );
 		};
 
 		//Actualiza email y otros campos
@@ -71,6 +81,40 @@ angular.module('uiRouterDocElectronicos.services', [
 		};
 
 		return clienteProveedorFactory;
+	}])
+	.factory('tablaRegistrosFactory', ['$http', '$window', function ($http, $window) {
+		var columnas = '/edi-docElectronicos/assets/menusYestados.json';
+		var tablaRegistrosFactory = {};
+		//Buscamos en el localStorage
+
+
+
+		tablaRegistrosFactory.getColumnas = function (callBack) {
+
+			if($window.localStorage.getItem('__columnas__data')){
+
+					try{
+						callBack(true, JSON.parse($window.localStorage.getItem('__columnas__data')));
+					}catch(error){
+						$window.localStorage.removeItem('__columnas__data');
+					}
+
+			}
+			$http.get(columnas).then(function(datos){
+
+					switch (datos.status) {
+						case 200:
+							   $window.localStorage.setItem('__columnas__data', JSON.stringify(datos.data.columnasTablaMov));
+							   callBack(true, datos.data.columnasTablaMov);
+						break;
+						default:
+							callBack(false);
+					}
+			});
+
+
+		};
+		return tablaRegistrosFactory;
 	}])
 	/*****
 	RESTful factory:
@@ -121,7 +165,7 @@ angular.module('uiRouterDocElectronicos.services', [
 		EMPRESAS CACHE
 		**************/
 		.factory('empresasFactory', ['$http','$window' , function ($http,$window) {
-				var urlBase = '/public/consultar/empresas/1';
+				var urlBase = '/consultar/empresas/1';
 				var empresasFactory ={};
 				empresasFactory.getAllEmpresas = function (cache) {
 					if(cache){
@@ -129,7 +173,7 @@ angular.module('uiRouterDocElectronicos.services', [
 							try{
 								return JSON.parse($window.localStorage.getItem('__empresas_cache__data')).datums;
 							}catch(error){
-
+								console.log(error);
 							}
 
 						}
@@ -142,14 +186,32 @@ angular.module('uiRouterDocElectronicos.services', [
 				};
 				return empresasFactory;
 			}])
-			/***************
-				LOGIN
-				**************/
-				.factory('loginFactory', ['$http','$window' , function ($http,$window) {
-						var urlBase = '/public/login';
-						var loginFactory ={};
-						loginFactory.login = function (credenciales) {
-							return  $http.post(urlBase, credenciales);
-						};
-						return loginFactory;
-					}]);
+		/***************
+		LOGIN
+		**************/
+		.factory('loginFactory', ['$http','$window' , function ($http,$window) {
+			var urlLogin = '/login';
+			var urlLogout = '/ver/salir';
+			var loginFactory ={};
+			loginFactory.login = function (credenciales) {
+				return  $http.post(urlLogin, credenciales);
+			};
+			loginFactory.logout = function () {
+
+				var res = $http.get(urlLogout); //lo borra de la sesion
+				 res.success(function(data, status, headers, config) {
+
+					 $window.location.href='/';  //redirige a la pagina principal
+				 });
+				 res.error(function(data, status, headers, config) {
+					 consolse.log(data) //Error al hacer logout
+					 $window.notificar("Por favor int&eacute;ntelo nuevamente","error");
+				 });
+		 	};
+			return loginFactory;
+		}])
+		.factory('currentUsuarioMV', ['$http','$window' , function ($http,$window) {
+			var currentUsuarioMV  = $window.usuario;
+
+			return currentUsuarioMV;
+		}])

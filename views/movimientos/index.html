@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Facturacion Electronica" content="documentos facturacion eletronica ecuaquimica san camilo galaex galascuba contyleg hevetia galapacific fumicar cidimer">
+    <meta name="orlando honores" content="desarrollador de Ecuaquimica">
+    <link rel="icon" href="../../favicon.ico">
+   <title>SwisSEdi::Systema de Documento Electrónicos</title>
+   <script type="text/javascript" src="/recursos/angular/angular.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/edi-docElectronicos/vendor/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/edi-docElectronicos/vendor/bootstrap-3.3.5/css/font-awesome.css" rel="stylesheet"/>
+        <!-- Custom styles for this template -->
+    <link href="/edi-docElectronicos/vendor/bootstrap-3.3.5/css/navbar-fixed-top.css" rel="stylesheet"/>
+    <link href="/edi-docElectronicos/vendor/bootstrap-3.3.5/css/tooltip-viewport.css" rel="stylesheet"/>
+    <link href="/edi-docElectronicos/vendor/bootstrap-3.3.5/css/sticky-footer.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/edi-docElectronicos/vendor/notificaciones/msgPop.css"/>
+    <link rel="stylesheet" href="/edi-docElectronicos/vendor/cssSwissEdi/codigos.css"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        var usuario = <%- JSON.stringify(user) %>;
+    </script>
+  </head>
+
+  <body ng-app="uiRouterDocElectronicosMovimiento" ng-controller="EmpresasCrtl">
+      <nav  class="navbar navbar-default navbar-fixed-top" style="background-color:#fff !important;" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+           <div style="max-height:130px;max-width:130px;padding:15px">
+  			<a href="#" id="rt-logo"><img ng-src="{{empresa.urllogo}}"  style="height:auto;width:100%;"  class="sprocket-mosaic-image"></a>
+
+  		 </div>
+
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <div class="progress" ng-show="blockprocesar" style="margin:15px 10px 0 0 !important;position: absolute;bottom: 0px;z-index: 10000;right: 5%;">
+  			  <div class="progress-bar progress-bar-striped active" role="progressbar"
+  			  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+  				<span style="padding:10px;">{{acccion_a_procesar}}</span>
+  			</div>
+  		  </div>
+            <ul class="nav navbar-nav navbar-right serifmenu">
+
+  			<li class="dropdown resizewindowempresa " ng-show="cliente.cliente_proveedor || cliente.razonsocial" style="margin:3px 10px 0 0 !important;">
+  				<span class="resizewindowempresa"><i class="icon-fixed-width icon-male"></i>
+  				<span title="{{cliente.cliente_proveedor && cliente.cliente_proveedor.datosSRI && cliente.cliente_proveedor.datosSRI.RazonSocial? cliente.cliente_proveedor.datosSRI.RazonSocial:(cliente.cliente_proveedor && cliente.cliente_proveedor.datosCNE && cliente.cliente_proveedor.datosCNE.Nombres? cliente.cliente_proveedor.datosCNE.Nombres:cliente.razonsocial)}}" >Cliente/Proveedor &#187; {{cliente.cliente_proveedor && cliente.cliente_proveedor.datosSRI && cliente.cliente_proveedor.datosSRI.RazonSocial? (cliente.cliente_proveedor.datosSRI.RazonSocial.length>28?cliente.cliente_proveedor.datosSRI.RazonSocial.substring(0,27)+"...":cliente.cliente_proveedor.datosSRI.RazonSocial):(cliente.cliente_proveedor && cliente.cliente_proveedor.datosCNE && cliente.cliente_proveedor.datosCNE.Nombres? (cliente.cliente_proveedor.datosCNE.Nombres.length>28?cliente.cliente_proveedor.datosCNE.Nombres.substring(0,27):cliente.cliente_proveedor.datosCNE.Nombres):(cliente.razonsocial &&  cliente.razonsocial.length>28?cliente.razonsocial.substring(0,27):cliente.razonsocial))}}</span>
+  			    </span>
+              </li>
+              <li ><a href="#" class="tooltip-bottom" title=""><i class="icon-fixed-width icon-user"></i>{{'Usuario &#187; '+currentUsuario.username}}</a></li>
+  			<li class="menumobil" >
+  				<ul class="nav nav-sidebar menumobil">
+  					<li ng-repeat="menu in menusPrincipal |filter:{estado:'true'}"  ><a href="#" ng-click="control.fmostrartabla(false,0,menu.codigo,true);"><i class="icon-fixed-width {{menu.icono}}"></i> {{menu.nombre}}</a></li>
+  				  </ul>
+  			</li>
+              <li><a href="#"><i class="icon-fixed-width icon-question"></i>Ayuda</a></li>
+              <li><a href="./" ng-click="procesarLogout();"><i class="icon-fixed-width icon-off"></i> Salir</a></li>
+  			<li class="dropdown" data-ng-show="currentUsuario.username !='pikai'">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-fixed-width icon-caret-down"></i></a>
+                  <ul class="dropdown-menu">
+                    <li ng-repeat="emisor in empresasCache"   ><a href="#" class="espaciosenblanco" ng-click="setCurrentEmpresa(emisor);control.busquedaAvanzada();"><img style="height:auto;width:50px;" ng-src="{{emisor.urllogo}}" /> &#187; {{emisor.descripcion}}</a></li>
+
+                    <li role="separator" class="divider"></li>
+
+                  </ul>
+                </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+
+	<div class="container" >
+        <br>
+		<div class="resizewindow">
+			<i class="icon-fixed-width icon-desktop"></i>
+			<span>{{cliente.cliente_proveedor && cliente.cliente_proveedor.datosSRI && cliente.cliente_proveedor.datosSRI.RazonSocial?cliente.cliente_proveedor.datosSRI.RazonSocial:(cliente.cliente_proveedor && cliente.cliente_proveedor.datosCNE && cliente.cliente_proveedor.datosCNE.Nombres? cliente.cliente_proveedor.datosCNE.Nombres:cliente.razonsocial)}}</span>
+            <!--<select ng-model="empresa" style="border:none;white-space: wrap;"  ng-options="emisor as emisor.descripcion for emisor in empresasCache" >
+			</select> -->
+		</div>
+        <div ui-view ></div>
+    </div>
+     <!-- Bootstrap core JavaScript
+     ================================================== -->
+
+     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="bootstrap-3.3.5/js/js/ie10-viewport-bug-workaround.js"></script>-->
+
+ <script type="text/javascript" src="/edi-docElectronicos/app/js/lib/librerias-core/jquery-1.11.1.min.js"></script>
+ <script type="text/javascript" src="/edi-docElectronicos/vendor/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+ <script type="text/javascript" src="/edi-docElectronicos/vendor/bootstrap-3.3.5/js/offcanvas.js"></script>
+ <script type="text/javascript" src="/edi-docElectronicos/app/js/lib/librerias-core/handlebars.js"></script>
+ <script type="text/javascript" src="/edi-docElectronicos/app/js/lib/librerias-core/typeahead.bundle.min.js"></script>
+
+ <script type="text/javascript" src="/edi-docElectronicos/app/js/lib/librerias-core/angular-sanitize.min.js"></script>
+ <script type="text/javascript" src="/recursos/angular-animate/angular-animate.min.js"></script>
+ <script type="text/javascript" src="/edi-docElectronicos/app/js/lib/angular-states/angular-ui-router.min.js"></script>
+ <script type="text/javascript" src="/edi-docElectronicos/vendor/notificaciones/jquery.msgPop.js"></script>
+ <!--APP DEL MOVIMIENTO -->
+ <script type="text/javascript" src="/edi-docElectronicos/app/js/movimientos/appMovimiento.js"></script>
+ <script type="text/javascript" src="/edi-docElectronicos/jsminificado/servicios.min.js"></script>
+ <script type="text/javascript" src="/edi-docElectronicos/app/js/movimientos/movimientosCtrl.js"></script>
+ <script type="text/javascript" src="/edi-docElectronicos/app/js/movimientos/filtros.js"></script>
+ <script type="text/javascript" src="/edi-docElectronicos/jsminificado/toArrayFilter.js"></script>
+
+ <!--<script type="text/javascript" src="/edi-docElectronicos/jsminificado/movTypehead.min.js"></script>-->
+
+ </body>
+</html>
