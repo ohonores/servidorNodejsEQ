@@ -21,6 +21,7 @@ angular.module('movimientos.controllers', ['ngSanitize'])
       $scope.setCurrentEmpresa = function(valor){
           $rootScope.empresa = valor;
       }
+
       clienteProveedorFactory.getClienteProveedor($scope.currentUsuario.persona).then(function(datos){
 
           switch (datos.status) {
@@ -40,7 +41,7 @@ angular.module('movimientos.controllers', ['ngSanitize'])
 
     $scope.movimientos = [];
     $scope.getRegistros = function(iPaginacion, prev){
-        
+
         $scope.blockprocesar = true;
         $scope.acccion_a_procesar="Consultando registros..."
         var url = '/ver/consultar/documentos/:empresaid/:personaid/:coddoc/:limite/paginacion/:id/:avanzar/fecha/:inicio/:fin/registroid/:registroid'.
@@ -81,7 +82,10 @@ angular.module('movimientos.controllers', ['ngSanitize'])
         clienteProveedor.initialize();
 
         var clienteProveedor_listo =  clienteProveedor.initialize();
-
+        $window.$("#prefetch-clientes-input").blur(function(){
+            console.log("on blur");
+            $scope.checkCliente();
+        });
         $window.$('#prefetch-clientes .typeahead').typeahead({
           hint : true,
           highlight: true,
@@ -113,10 +117,15 @@ angular.module('movimientos.controllers', ['ngSanitize'])
     }
     $scope.iniciarTypehead();
     $scope.checkCliente = function(){
+            console.log("checkCliente");
+            console.log($window.$("#prefetch-clientes-input").val()+"-");
+            console.log(!$window.$("#prefetch-clientes-input").val());
+            console.log(!$window.$("#prefetch-clientes-input").val().trim());
 	       if(!$window.$("#prefetch-clientes-input").val()){
 				$rootScope.cliente = {};
 			}
             $scope.getRegistros();
+            $scope.mostrarMensajeprefetch = false;
 	};
 }])
 .controller('MenuCrtl',["$scope", "$rootScope", "$state", "$http", 'menusDcoumentosEstados', 'tablaRegistrosFactory',  function($scope, $rootScope, $state, $http, menusDcoumentosEstados, tablaRegistrosFactory) {

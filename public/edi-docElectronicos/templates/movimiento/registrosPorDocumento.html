@@ -271,14 +271,12 @@
 
     <div class="input-group" ng-hide="currentUsuario.edi" id="buscar-cliente" >
         <div style="width:100%"   id="prefetch-clientes" >
-            <input  style="font-size:12px;width:100%!important;"   ng-click="cliente.razonsocial ? mostrarMensajeprefetch=false:mostrarMensajeprefetch=true" id="prefetch-clientes-input" ng-blur="mostrarMensajeprefetch=false;checkCliente();" ng-enter="checkCliente();" class="typeahead" type="text" placeholder=" Ingrese el Cliente/Proveedor a buscar" />
+            <input  style="font-size:12px;width:100%!important;"   ng-click="cliente.razonsocial ? mostrarMensajeprefetch=false:mostrarMensajeprefetch=true" id="prefetch-clientes-input"    ng-blur="mostrarMensajeprefetch=false;checkCliente();" ng-enter="checkCliente();" class="btn typeahead" type="text" placeholder=" Ingrese el Cliente/Proveedor a buscar" />
         </div>
-        <span class="input-group-btn" >
+        <span class="input-group-btn">
         <button class="btn btn-primary"   ng-click="getRegistros(false, false);" name="buscarRegistrosNow" id="buscarRegistrosNow" type="button"><i class="icon-fixed-width icon-search" title="Buscar registros"></i>
         </button>
-
     </div>
-
     <div class="alert alert-success" ng-show="mostrarMensajeprefetch" role="alert">Una vez seleccionado el cliente, presione enter o haga click sobre la lupa de búsqueda<br>Si desea ver todos, borre el registro y presione enter</div>
 
     <div class="input-group" ng-show="currentUsuario.edi" id="buscar-doc" >
@@ -286,8 +284,6 @@
         <span class="input-group-btn" >
         <button class="btn btn-primary"   ng-click="getRegistros(false, false);" name="buscarRegistrosNow" id="buscarRegistrosNow" type="button"><i class="icon-fixed-width icon-search" title="Buscar registros"></i>
         </button>
-
-
     </div>
     <div class="alert alert-success" ng-show="mostrarMensajeBC" role="alert">Una vez ingresado el criterio a buscar haga click sobre la lupa</div>
 </div>

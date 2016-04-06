@@ -3,8 +3,8 @@ angular.module('uiRouterDocElectronicos', [
   'ui.router',
   'ngAnimate',
   'uiRouterDocElectronicos.services',
-  'electronicos.controllers',
-  'angular-toArrayFilter'
+  'electronicos.controllers'
+
 ])
 .run(
   [          '$rootScope', '$state', '$stateParams',
