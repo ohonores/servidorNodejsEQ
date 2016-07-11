@@ -1,4 +1,14 @@
 var Menus = function() {
+    this.estadosPorPefil = [
+        {
+            "perfil":"admin",
+             "estados":"*"
+        },
+        {
+            "perfil":"edi",
+             "estados":"'A','G','O'"
+        }
+    ];
     this.menuPrincipal = [
                         {
                             "nombre":"Documentos",
@@ -87,8 +97,8 @@ var Menus = function() {
                             "codigo":"100",
                             "perfiles":"admin"
                         }
-                    ]
+                    ];
 
-}
+};
 
 module.exports = new Menus();

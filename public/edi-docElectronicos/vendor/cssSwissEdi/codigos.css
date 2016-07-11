@@ -142,7 +142,7 @@ Paginacion imagenes next o preview
 	/**********
 	FUENTES
 	**********/
-	
+
 @font-face {
   font-family: 'serif';
   src: url('/font/FreightBigLight.eot'); /* IE9 Compat Modes */
@@ -150,7 +150,7 @@ Paginacion imagenes next o preview
        url('/font/FreightBigLight.woff') format('woff'), /* Modern Browsers */
        url('/font/FreightBigLight.ttf')  format('truetype'), /* Safari, Android, iOS */
        url('/font/FreightBigLight.svg#20ccbfb081d3f70e3b34015a627bf223') format('svg'); /* Legacy iOS */
-       
+
   font-style:   normal;
   font-weight:  200;
 }
@@ -186,7 +186,7 @@ font-family: "I2of5nt";
 
  src: url('I2of5nt.eot?#iefix') format('embedded-opentype'),
         url('FI2of5nt.eot'),
-     url('I2of5nt.woff') format('woff'), 
+     url('I2of5nt.woff') format('woff'),
      url('I2of5nt.ttf')  format('truetype'),
      url('I2of5nt.svg#svgFontName') format('svg');
 }
@@ -262,7 +262,7 @@ font-family: "I2of5nt";
 	font-size: 14pt;
 	line-height: 16pt;
 	letter-spacing: 1pt;
-	
+
 }
 
 .serifparrafo2 {
@@ -271,7 +271,7 @@ font-family: "I2of5nt";
 	font-size: 12pt;
 	line-height: 26pt;
 	letter-spacing: 2pt;
-	
+
 }
 .fileUpload {
     position: relative;
@@ -332,11 +332,11 @@ font-family: "I2of5nt";
 .typeahead {
   background-color: #fff;
   width: 100%;
-   
+
 }
 
 .typeahead:focus {
-  
+
  width:100%;
 }
 
@@ -373,8 +373,8 @@ font-family: "I2of5nt";
 .tt-suggestion {
   padding: 3px 10px;
   font-size: 12px;
-  line-height: 8px;
-  
+  line-height: 10px;
+
 }
 
 .tt-suggestion.tt-cursor {
@@ -385,7 +385,7 @@ font-family: "I2of5nt";
 }
 .twitter-typeahead{
     width:100% !important;
-   
+
 }
 .tt-suggestion p {
   margin: 0;
@@ -427,20 +427,20 @@ font-family: "I2of5nt";
   overflow-y: auto;
 }
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	#rt-copyright{text-align:center}
 	.menumobil{display:none;}
 	.columnasnomobilesa{display:block;}
@@ -452,7 +452,7 @@ font-family: "I2of5nt";
 		.resizewindow{display:block;}
 		.resizewindowempresa{display:none;}
 		.columnasnomobilesa{display:none;}
-		
+
 	}
 	@media (max-width: 768px) {
 	  .escondeme {
@@ -466,4 +466,30 @@ font-family: "I2of5nt";
 	}
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes example {
+    from {background-color: transparent;}
+    to {background-color: rgb(37, 37, 234);}
+}
+
+/* Standard syntax */
+@keyframes example {
+    from {background-color: transparent;}
+    to {background-color: rgb(37, 37, 234);}
+}
+.notif002 {
+    background-color: transparent;
+    -webkit-animation-name: example; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 2s; /* Chrome, Safari, Opera */
+    animation-name: example;
+    animation-duration: 2s;
+}
+.footerM {
+  position: fixed;;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+ 
+  background-color: #f5f5f5;
 }

@@ -1,10 +1,6 @@
 <span  class="titulo_14">Asistente Virtual</span>
 							<hr>
-							<div class="progress" ng-show="formDatosVirtual.formularioAprocesarD">
-							  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
-								<span class="sr-only">85% Complete</span>Procesando...
-							  </div>
-							</div>
+							
 							<form id="asistente-virtual" ng-submit="getValidarInforacionAsistentVirtual()">
 								<div class="input-group">
 									<span class="input-group-addon" style="background-color:#fff" id="sizing-addon30"><i class="icon-fixed-width icon-user"></i></span>
@@ -73,7 +69,7 @@
 							  </a>
 							</div>
 							<div class="input-group">
-								<input name="mensajeChat" id="mensajeChat" class="form-control" ng-keyup="enviarDatos();"   ng-enter="enviarMsgDatos();"  ng-model="formDatosVirtual.mensajeChat"    type="text"  placeholder="Ingrese su mensaje aqui"  />
-								<span class="input-group-addon" id="basic-addon2"><a href="" ng-click="enviarMsgDatos();"  >Enviar</a></span>
+								<input name="mensajeChat" id="mensajeChat" class="form-control" ng-keyup="enviarDatos();"   ng-enter="enviarMensaje();"  ng-model="formDatosVirtual.mensajeChat"    type="text"  placeholder="Ingrese su mensaje aqui"  />
+								<span class="input-group-addon" id="basic-addon2"><a href="" ng-click="enviarMensaje(formDatosVirtual.mensajeChat);"  >Enviar</a></span>
 							</div>
 							<span><a href="" ng-click="!formDatosVirtual.mensajesEnviados?formDatosVirtual.mensajesEnviados=true:formDatosVirtual.mensajesEnviados=false;" > Ver/Ocultar mensajes enviados</a></span>

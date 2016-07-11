@@ -25,6 +25,7 @@ ClientePG.prototype.init = function () {
 };
 
 ClientePG.prototype.getPoolClienteConexion = function (sql, parametros, resultado) {
+    
 		pg.connect(conString, function(err, client, done) {
 			if(err) {
 				console.error('error fetching client from pool', err)
@@ -38,7 +39,8 @@ ClientePG.prototype.getPoolClienteConexion = function (sql, parametros, resultad
 					if(err.code && err.code ==="23505"){
 						//console.log(err.datail);
 					}else{
-						console.log(err);
+                        console.log("Error en getPoolClienteConexion sql ",sql);
+						console.log("Error en getPoolClienteConexion ",err);
 					}
 
 
@@ -238,7 +240,7 @@ ClientePG.prototype.grabarBitacoraUsuario  = function(empresa, sesionid,usuario,
 			/********************
 				INSERTAR EN BASE DE DATOS
 			 ********************/
-			console.log(sesionid);
+			//console.log(sesionid);
 
 			var sqlinsert = "insert into swissedi.eeditusarios_conectados(empresa, sesionid, usuario,browser,ip,ubicacion,ingresos) values($1,$2,$3,$4,$5,$6,$7)  RETURNING id";
 			var ingresos = {fechaingreso:[new Date()]};
@@ -405,7 +407,7 @@ ClientePG.prototype.getEmpresas  = function(respuesta){
  				if(resultado && resultado.rowCount >0){
  					respuesta(true);
  				}else{
- 					console.log(resultado);
+ 					//console.log(resultado);
  					respuesta(false);
  				}
 
@@ -445,7 +447,8 @@ ClientePG.prototype.getEmpresas  = function(respuesta){
     	var valores=[];
     	var columnasBusqueda=[];
     	var i=1;
-		console.log("parametros.busqueda")
+		console.log("parametros.busquedafff")
+        console.log(parametros)
 
 		for(var key in parametros.busqueda){
 			columnasBusqueda.push(key + " = $"+i);
@@ -477,7 +480,7 @@ ClientePG.prototype.getEmpresas  = function(respuesta){
 		var valores=[];
 		var columnasBusqueda=[];
 		var i=1;
-		console.log("parametros.busqueda")
+		console.log("parametros.busqueda total")
 		console.log(parametros.busqueda)
 		for(var key in parametros.busqueda){
 			columnasBusqueda.push(key + " = $"+i);
@@ -495,8 +498,8 @@ ClientePG.prototype.getEmpresas  = function(respuesta){
 				replace("#Fecha", parametros.fecha && parametros.fecha.campo && parametros.fecha.inicio && parametros.fecha.fin ? " AND  "+parametros.fecha.campo+ " BETWEEN "+parametros.fecha.inicio+" AND  "+parametros.fecha.fin  :"" );
 				console.log(sqlTotal);
 		this.getPoolClienteConexion(sqlTotal, valores, function(resultado){
-			console.log('postgres consultarTotalRegistrosDinamicamente');
-			console.log(resultado);
+			//console.log('postgres consultarTotalRegistrosDinamicamente');
+			//console.log(resultado);
 			respuesta((resultado && resultado.rows && resultado.rows[0] && resultado.rows[0].total) ?  resultado.rows[0].total :0 );
 		});
 
@@ -513,4 +516,17 @@ ClientePG.prototype.getEmpresas  = function(respuesta){
 				});
 
 		};
+
+ClientePG.prototype.getDatestyle = function(respuesta){
+	var query = "show datestyle";
+	this.getPoolClienteConexion(query, null, function(resultado){
+	if(resultado && resultado.rows && resultado.rows[0] && resultado.rows[0].DateStyle){
+		respuesta(resultado.rows[0].DateStyle.replace("iso","").replace(",","").replace("ISO","").replace(/ /g,"").toLowerCase());
+	}else{
+		respuesta([]);
+	}
+	});
+};
+
+
 module.exports = new ClientePG();

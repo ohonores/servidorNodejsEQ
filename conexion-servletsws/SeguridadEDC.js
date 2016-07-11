@@ -8,21 +8,21 @@ var crypto = require('crypto'),
     password = '12999999393IEWKDUFDHJU434-.?';
 
 function encrypt(text){
-  var cipher = crypto.createCipher(algorithm,password)
-  var crypted = cipher.update(text,'utf8','hex')
+  var cipher = crypto.createCipher(algorithm,password);
+  var crypted = cipher.update(text,'utf8','hex');
   crypted += cipher.final('hex');
   return crypted;
 }
 
 function decrypt(text){
-  var decipher = crypto.createDecipher(algorithm,password)
-  var dec = decipher.update(text,'hex','utf8')
+  var decipher = crypto.createDecipher(algorithm,password);
+  var dec = decipher.update(text,'hex','utf8');
   dec += decipher.final('utf8');
   return dec;
 }
 function decryptMD5(text){
-  var decipher = crypto.createDecipher("md5","dd")
-  var dec = decipher.update(text,'hex','utf8')
+  var decipher = crypto.createDecipher("md5","dd");
+  var dec = decipher.update(text,'hex','utf8');
   dec += decipher.final('utf8');
   return dec;
 }
@@ -55,16 +55,17 @@ SeguridadEDC.prototype.desencriptar = function(texto){
 // verifica si el usuario se encuentra autentificado
 SeguridadEDC.prototype.isUserAutenficado = function(req, res, next) {
 
-    console.log("SeguridadEDC.prototype.isUserAutenficado");
-    console.log(req.user);
+   // console.log("SeguridadEDC.prototype.isUserAutenficado");
+//    console.log(req.user);
     //Si lo esta permite el siguiente evento
     if (req.isAuthenticated())
         return next();
-
+  //  console.log("Enviando a la pagina principal");
     //Si no esta lo envia a la pagina principal
-    res.render('movimientos/iniciarSesion.html',{mensajeExtra:"..."});
-    //res.redirect('/');
-}
+    res.status(401).render('movimientos/iniciarSesion.html',{mensajeExtra:"..."});
+    //return res.redirect('/');
+
+};
 
 
 SeguridadEDC.prototype.supportCrossOriginScript = function(req, res, next) {
@@ -80,7 +81,7 @@ SeguridadEDC.prototype.supportCrossOriginScript = function(req, res, next) {
 var datosInjections = ['select','1=1','delete','update','where','values','=','>','<','!=','drop table','drop database','drop ',' drop ',' drop',';'];
 SeguridadEDC.prototype.verficarInjections = function (req, res, next){
    var aceptar  = true;
-   console.log(req.originalUrl)
+  // console.log(req.originalUrl)
    for(keyjson in req.params){
 		var dato = req.params[keyjson] + ''.toLowerCase().replace(/'/g, '').replace(/"/g, '')
 		for(index in datosInjections){
@@ -108,7 +109,7 @@ SeguridadEDC.prototype.verficarInjections = function (req, res, next){
     }else{
         req.logout();
         postgres.updateJson({sesionid:req.sessionID},{logout:new Date()},"swissedi.eeditusarios_conectados",function(res){
-            console.log(res);
+           // console.log(res);
         })
         res.render('movimientos/iniciarSesion.html',{mensajeExtra:"Encontramos paramentros no permitdos, por tal motivo se ha cerrado su sesión"});
     }

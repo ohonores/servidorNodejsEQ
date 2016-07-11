@@ -1,10 +1,6 @@
 <span  class="titilo_14">Recuperación de clave</span><hr>
 
-<div class="progress" ng-show="formDatosVirtual.formularioAprocesar">
-    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
-        <span class="sr-only">85% Complete</span>Procesando...
-    </div>
-</div>
+
 <form id="resetearPassword" onsubmit="return false"  ng-submit="procesarFormReseteoPassword()">
     <div class="input-group">
         <span class="input-group-addon" style="background-color:#fff" id="sizing-addon11"><i class="icon-fixed-width icon-user"></i></span>
@@ -12,13 +8,13 @@
     </div>
     <br>
     <div class="input-group">
-        <span class="input-group-addon" style="background-color:#fff" id="sizing-addon13"><label for="captcha" style="color:white;text-shadow:none"><img style="height:auto;width:50px" ng-src="{{imagenCaptcha}}" /></label></span>
+        <span class="input-group-addon" style="background-color:#fff;padding:0px 3px !important" id="sizing-addon13"><label for="captcha" style="color:white;text-shadow:none;margin-bottom:0px"><img ng-init="imagenCaptcha ? imagenCaptcha :imagenResetFormulario();" style="height:auto;width:60px" ng-src="{{imagenCaptcha}}" /></label></span>
         <input type="text" ng-keyup="enviarDatos();" class="form-control" name="captcha" ng-model="formDatosVirtual.captcha" id="captcha" value="" placeholder="Ingrese el número" autocomplete="off" required/>
 
     </div>
     <br>
     <div class="input-group">
-        <span class="input-group-addon" style="background-color:#fff"  id="sizing-addon4"><input type="checkbox" ng-click="enviarDatos();" onclick="enviarTerminosRP()" ng-model="formDatosVirtual.rcondic" data-mini="true"   id="terminosCRP" /></span>
+        <span class="input-group-addon" style="background-color:#fff"  id="sizing-addon4"><input type="checkbox" ng-click="enviarDatos();"  ng-model="formDatosVirtual.rcondic" data-mini="true"   id="terminosCRP" /></span>
         <label for="terminosCRP" type="text" class="form-control"  aria-describedby="sizing-addon2" ><span style="font-weight:normal">Acepto las condiciones</span></label>
     </div>
     <a href="#"  aria-describedby="sizing-addon2" ui-sref="ingreso.condiciones" ng-click="formDatosVirtual.formularioB=false;formDatosVirtual.formularioD=false;enviarDatos();"><span style="font-size:14px !important;"><span style="font-size:14px !important;">Ver Condiciones</span></span></a>

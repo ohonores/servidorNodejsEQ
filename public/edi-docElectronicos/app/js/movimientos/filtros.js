@@ -5,20 +5,21 @@ angular.module('movimientos.filtros', ['ngSanitize'])
 *************************/
 .filter('checkTipoDoc', function($window) {
     return function(input) {
-
-        switch(input){
-            case '0':
+        switch(parseInt(input)){
+            case 0:
                 return "Un solo email";
-            case '1':
+            case 1:
                 return "Factura";
-            case '2':
+            case 2:
                 return "Nota Cr\u00E9dito";
-            case '3':
+            case 3:
                 return "Nota D\u00E9bito";
-            case '4':
+            case 4:
                 return "Guia Remisi\u00F3n";
-            case '5':
+            case 5:
                 return "Comp. Retenci\u00F3n";
+            default:
+                return "Doc. Desconocido";
         }
 
 
@@ -39,6 +40,29 @@ angular.module('movimientos.filtros', ['ngSanitize'])
               return input ? '\u2713' : '\u2718';
           };
 })
+//TIPO DE DOCUMENTOS
+.filter('chequearEstados', function($window) {
+          return function(input) {
+              var est = {"B":"RECIBIDO POR EDI",
+              								"E":"ENVIADO AL SRI",
+              								"R":"RECIBIDO POR EL SRI",
+              								"A":"AUTORIZADO POR EL SRI",
+              								"N":"NO AUTORIZADO POR SRI",
+              								"D":"DEVUELTA POR EL SRI",
+              								"G":"CONTINGENCIA",
+              								"X":"ANULADA POR EDI",
+              								"P":"PENDIENTE AUTORIZACION",
+              								"C":"NO CONEX. CON EL SRI",
+              								"S":"NO CONEX. SRI XML ENV. ",
+              								"O":"ANULADA EN AMB. PRODUCCION",
+                                            "W":"ADVERTENCIA",
+                                            "Y":"ESQUEMA OFF LINE"};
+
+              return est[input];
+          };
+})
+
+
  /************************
     FILTRAR TIPO DE ESTADO
 *************************/

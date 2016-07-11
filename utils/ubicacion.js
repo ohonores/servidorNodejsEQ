@@ -13,7 +13,7 @@ Resultado: {"site": "http://ip.pycox.com", "city": "Quito", "region_name": "Pich
 ***********************************************/
 
 UbicacionIp.prototype.getUbicacionIp = function(ip, respuesta){
-    if(ip.replace("::ffff:","").startsWith("192.1") || ip.replace("::ffff:","").startsWith("local") ||ip =="::1"){
+    if(ip.replace("::ffff:","").indexOf("192.1")>=0 || ip.replace("::ffff:","").indexOf("local")>=0 ||ip =="::1"){
         console.log("getUbicacionIp es localll");
         respuesta({ubicacion:"red local"});
     }

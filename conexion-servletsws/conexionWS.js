@@ -15,20 +15,20 @@ var MonitorArchivos = require('../archivosUtil/MonitorArchivos.js');
 function formatDate(d,separador) {
 
 
- var mm = d.getMonth()+1
-  if ( mm < 10 ) mm = '0' + mm
+ var mm = d.getMonth()+1;
+  if ( mm < 10 ) mm = '0' + mm;
   var dd = d.getDate();
-  if ( dd < 10 ) dd = '0' + dd
+  if ( dd < 10 ) dd = '0' + dd;
 
 
 
   var yy = d.getFullYear();
-  if ( yy < 10 ) yy = '0' + yy
+  if ( yy < 10 ) yy = '0' + yy;
   switch(fecheestilo){
 	case 'mdy':
-	return '\''+mm+separador+dd+separador+yy+'\''
+	return '\''+mm+separador+dd+separador+yy+'\'';
 	case 'dmy':
-	return '\''+dd+separador+mm+separador+yy+'\''
+	return '\''+dd+separador+mm+separador+yy+'\'';
 
   }
 
@@ -37,60 +37,60 @@ function formatDate(d,separador) {
 function getParametroCondiciiones() {
  //MMyyyydd condicones
  var d = new Date();
- var mm = d.getMonth()+1
-  if ( mm < 10 ) mm = '0' + mm
+ var mm = d.getMonth()+1;
+  if ( mm < 10 ) mm = '0' + mm;
   var dd = d.getDate();
-  if ( dd < 10 ) dd = '0' + dd
+  if ( dd < 10 ) dd = '0' + dd;
 
 
 
   var yy = d.getFullYear();
-  if ( yy < 10 ) yy = '0' + yy
+  if ( yy < 10 ) yy = '0' + yy;
 
   return 'c'+mm+''+yy+''+dd;
 }
 function getParametroCaptcha() {
  //ddyyyyMM captcah
  var d = new Date();
- var mm = d.getMonth()+1
-  if ( mm < 10 ) mm = '0' + mm
+ var mm = d.getMonth()+1;
+  if ( mm < 10 ) mm = '0' + mm;
   var dd = d.getDate();
-  if ( dd < 10 ) dd = '0' + dd
+  if ( dd < 10 ) dd = '0' + dd;
 
 
 
   var yy = d.getFullYear();
-  if ( yy < 10 ) yy = '0' + yy
+  if ( yy < 10 ) yy = '0' + yy;
 
   return dd+''+yy+''+mm;
 }
 function getParametroCodigo() {
  //yyyyddMM codigo
  var d = new Date();
- var mm = d.getMonth()+1
-  if ( mm < 10 ) mm = '0' + mm
+ var mm = d.getMonth()+1;
+  if ( mm < 10 ) mm = '0' + mm;
   var dd = d.getDate();
-  if ( dd < 10 ) dd = '0' + dd
+  if ( dd < 10 ) dd = '0' + dd;
 
 
 
   var yy = d.getFullYear();
-  if ( yy < 10 ) yy = '0' + yy
+  if ( yy < 10 ) yy = '0' + yy;
 
   return yy+''+dd+''+mm;
 }
 function getParametroClave() {
  //ddMMyyyy codigo/email
  var d = new Date();
- var mm = d.getMonth()+1
-  if ( mm < 10 ) mm = '0' + mm
+ var mm = d.getMonth()+1;
+  if ( mm < 10 ) mm = '0' + mm;
   var dd = d.getDate();
-  if ( dd < 10 ) dd = '0' + dd
+  if ( dd < 10 ) dd = '0' + dd;
 
 
 
   var yy = d.getFullYear();
-  if ( yy < 10 ) yy = '0' + yy
+  if ( yy < 10 ) yy = '0' + yy;
 
   return dd+''+mm+''+yy;
 }
@@ -98,15 +98,15 @@ function getParametroClave() {
 function getParametroNuevaClave() {
  //MMddyyyy codigo/email
  var d = new Date();
- var mm = d.getMonth()+1
-  if ( mm < 10 ) mm = '0' + mm
+ var mm = d.getMonth()+1;
+  if ( mm < 10 ) mm = '0' + mm;
   var dd = d.getDate();
-  if ( dd < 10 ) dd = '0' + dd
+  if ( dd < 10 ) dd = '0' + dd;
 
 
 
   var yy = d.getFullYear();
-  if ( yy < 10 ) yy = '0' + yy
+  if ( yy < 10 ) yy = '0' + yy;
 
   return 'n'+mm+''+dd+''+yy;
 }
@@ -114,16 +114,16 @@ function getParametroNuevaClave() {
 function getParametroDinamico(formato,parametroextra) {
  //MMddyyyy codigo/email
  var d = new Date();
- var mm = d.getMonth()+1
-  if ( mm < 10 ) mm = '0' + mm
+ var mm = d.getMonth() + 1;
+  if ( mm < 10 ) mm = '0' + mm;
   var dd = d.getDate();
-  if ( dd < 10 ) dd = '0' + dd
+  if ( dd < 10 ) dd = '0' + dd;
 
 
 
   var yy = d.getFullYear();
   var resultado = parametroextra;
-  if ( yy < 10 ) yy = '0' + yy
+  if ( yy < 10 ) yy = '0' + yy;
 	switch(formato){
 		case 'ddMMyyyy':
 			resultado = resultado +  dd+''+mm+''+yy;
@@ -145,15 +145,15 @@ function getParametroDinamico(formato,parametroextra) {
 function getParametroReNuevaClave() {
  //ddyyyyMM codigo/email, ddyyyyMM
  var d = new Date();
- var mm = d.getMonth()+1
-  if ( mm < 10 ) mm = '0' + mm
+ var mm = d.getMonth() + 1;
+  if ( mm < 10 ) mm = '0' + mm;
   var dd = d.getDate();
-  if ( dd < 10 ) dd = '0' + dd
+  if ( dd < 10 ) dd = '0' + dd;
 
 
 
   var yy = d.getFullYear();
-  if ( yy < 10 ) yy = '0' + yy
+  if ( yy < 10 ) yy = '0' + yy;
 
   return 'r'+dd+''+yy+''+mm;
 }
@@ -176,7 +176,7 @@ ServletWS.prototype.getSesionUsuarioMB = function(propiedad, res) {
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 	request({
 				uri: "https://"+hostSwissEdiWS+"/obteneSesionUsuarioMB?propiedad="+propiedad,
 				method: "GET",
@@ -188,17 +188,17 @@ ServletWS.prototype.getSesionUsuarioMB = function(propiedad, res) {
 			   if (propiedad === 'imagen'){
 					try{
 						request.pipe(res);
-					}catch(error){
-						console.log(error);
+					}catch(errores){
+						console.log(errores);
 						res.send('No se encontro la imagen');
 					}
 			   }else{
 					res.send(body); //imprime el resultado en pantalla
 				}
-			})
+			});
 
 
-}//fin function getInfoMagapClienteBeneficiario
+};//fin function getInfoMagapClienteBeneficiario
 
 ServletWS.prototype.procesarRoborEdiWS = function (empresa, accion, codigo,id,estados,res){
 	 var header={
@@ -210,7 +210,7 @@ ServletWS.prototype.procesarRoborEdiWS = function (empresa, accion, codigo,id,es
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 	request({
 
 				uri: "https://"+hostSwissEdiWS+"/procesarRobots?clave=clave&empresa="+empresa+"&accion="+accion+"&codigo="+codigo+"&id="+id+"&estados="+estados,
@@ -224,12 +224,12 @@ ServletWS.prototype.procesarRoborEdiWS = function (empresa, accion, codigo,id,es
 
 					  res.send(body);
 					} else {
-					  res.send(body)
+					  res.send(body);
 					}
-			})
+			});
 
 
-}
+};
 /*******************
 ACTIVAR ROBOTS
 ********************/
@@ -244,7 +244,7 @@ ServletWS.prototype.procesarRoborEdiWSEXS_SAS_EE_SPAS = function(accion,codigo,i
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 	request({
 
 				uri: "https://"+hostSwissEdiWS+"/procesarRobots?clave=clave&accion="+accion+"&codigo="+codigo+"&id="+id,
@@ -257,12 +257,12 @@ ServletWS.prototype.procesarRoborEdiWSEXS_SAS_EE_SPAS = function(accion,codigo,i
 
 					  res.send(body);
 					} else {
-					  res.send(body)
+					  res.send(body);
 					}
-			})
+			});
 
 
-}
+};
 ServletWS.prototype.getRideDeComprasPorClaveAcceso = function(claveAcceso, res){
 
   var header={
@@ -274,7 +274,7 @@ ServletWS.prototype.getRideDeComprasPorClaveAcceso = function(claveAcceso, res){
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 	request({
 
 				uri: "https://"+hostSwissEdiWS+"/bajarArchivo?claveacceso="+claveAcceso,
@@ -283,10 +283,10 @@ ServletWS.prototype.getRideDeComprasPorClaveAcceso = function(claveAcceso, res){
 				timeout : 10000, //Maximo espera 10 segundos por peticion
 				agentOptions: agentOptions_
 
-			}).pipe(res)
+			}).pipe(res);
 
 
-}
+};
 
 
 /*******************
@@ -303,7 +303,7 @@ ServletWS.prototype.procesarRoborEdiEnviarAutorizarXmlSri = function(tipo,id,res
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 	request({
 
 				uri: "https://"+hostSwissEdiWS+"/procesarRobots?clave=clave&"+(tipo==='1'?"enviar":(tipo==='2'?"autorizar":"ninguno"))+"=true"+"&id="+id,
@@ -313,7 +313,7 @@ ServletWS.prototype.procesarRoborEdiEnviarAutorizarXmlSri = function(tipo,id,res
 				agentOptions: agentOptions_
 			}, function(error, response, body) {
 					if(error){
-						res(error)
+						res(error);
 						return;
 					}
 					if (body && response.statusCode == 200) {
@@ -321,16 +321,16 @@ ServletWS.prototype.procesarRoborEdiEnviarAutorizarXmlSri = function(tipo,id,res
 					  res(body);
 					} else {
 						if(body){
-							res(body)
+							res(body);
 						}else{
 							res("Error codigo::"+response.statusCode);
 						}
 
 					}
-			})
+			});
 
 
-}
+};
 
 
 ServletWS.prototype.getTiposRobots = function(grupo,res){
@@ -344,8 +344,8 @@ ServletWS.prototype.getTiposRobots = function(grupo,res){
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
-	grupo = grupo == '1'?'':grupo
+};
+	grupo = grupo == '1'?'':grupo;
 	request({
 
 				uri: "https://"+hostSwissEdiWS+"/procesarRobots?clave=clave&tiposDeHilos="+grupo,
@@ -358,12 +358,12 @@ ServletWS.prototype.getTiposRobots = function(grupo,res){
 
 					  res.send(body);
 					} else {
-					  res.send(body)
+					  res.send(body);
 					}
-			})
+			});
 
 
-}
+};
 
 ServletWS.prototype.getEstadosEdi = function(res){
 
@@ -376,7 +376,7 @@ ServletWS.prototype.getEstadosEdi = function(res){
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 
 	request({
 
@@ -390,11 +390,11 @@ ServletWS.prototype.getEstadosEdi = function(res){
 
 					  res.send(body);
 					} else {
-					  res.send(body)
+					  res.send(body);
 					}
-			})
+			});
 
-}
+};
 
 ServletWS.prototype.procesarRoboTablasTransito = function(empresa, accion, tipodoc,tiempo,res){
 	var header={
@@ -406,7 +406,7 @@ ServletWS.prototype.procesarRoboTablasTransito = function(empresa, accion, tipod
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 	request({
 				//curl "http://localhost:8083/swissedi-tablaProduccionATablasTransito/iniciarRobot?clave=clave&empresa=500&accion=2&tipodoc=1&fecha=&tiempoEspera=10&codigoUltimoId=1"
 				uri: "http://"+hostSwissEdiTablasTransitorias+"/iniciarRobot?clave=clave&empresa="+empresa+"&accion="+accion+"&tipodoc="+tipodoc+"&fecha=&tiempoEspera="+tiempo+"&codigoUltimoId=1",
@@ -419,13 +419,13 @@ ServletWS.prototype.procesarRoboTablasTransito = function(empresa, accion, tipod
 
 					  res.send(body);
 					} else {
-					    console.log(error)
-					  res.send(error)
+					    console.log(error);
+					  res.send(error);
 					}
-			})
+			});
 
 
-}
+};
 
 
 ServletWS.prototype.procesarRobotUnsuscribedEmailEstadoCuenta = function(email, idpersona, id,proceso,clave,respuesta){
@@ -438,7 +438,7 @@ ServletWS.prototype.procesarRobotUnsuscribedEmailEstadoCuenta = function(email, 
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 	request({
 				//curl "http://localhost:8081/swissedi-tablaProduccionATablasTransito/iniciarRobot?email=ohonores@hotmail.com&id=1&proceso=1&clave=mAXec4WIeyDSFCK89kyL6A17PNBnEgF3"
 				uri: "http://"+hostSwissEdiTablasTransitorias+"/iniciarRobot?email="+email+"&id="+id+"&idpersona="+idpersona+"&proceso="+proceso+"&clave="+clave,
@@ -451,13 +451,13 @@ ServletWS.prototype.procesarRobotUnsuscribedEmailEstadoCuenta = function(email, 
 
 					  respuesta(JSON.parse(body));
 					} else {
-					    console.log(error)
-					  respuesta({"error":error})
+					    console.log(error);
+					  respuesta({"error":error});
 					}
-			})
+			});
 
 
-}
+};
 
 
 
@@ -471,7 +471,7 @@ ServletWS.prototype.procesarRobotEmailsInvalidos = function(objson,respuesta){
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 
 	request({
 				//curl "http://localhost:8083/swissedi-tablaProduccionATablasTransito/iniciarRobot?clave=clave&empresa=500&accion=2&tipodoc=1&fecha=&tiempoEspera=10&codigoUltimoId=1"
@@ -487,12 +487,12 @@ ServletWS.prototype.procesarRobotEmailsInvalidos = function(objson,respuesta){
 					  respuesta(body);
 					} else {
 
-					  respuesta(error)
+					  respuesta(error);
 					}
-			})
+			});
 
 
-}
+};
 
 
 
@@ -507,15 +507,15 @@ ServletWS.prototype.getImagenCaptcha = function (propiedad, ipaddress, res){
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 	request.get({
 			uri:'https://'+hostSwissEdiWS+'/obteneSesionUsuarioMB?propiedad=imagen&ipaddress='+ipaddress,
 			method: "GET",
 				headers: header,
 				timeout : 10000, //Maximo espera 10 segundos por peticion
 				agentOptions: agentOptions_
-	}).pipe(res)
-}
+	}).pipe(res);
+};
 
 ServletWS.prototype.setThumbnail = function (origen, destino, res){
 
@@ -528,7 +528,7 @@ ServletWS.prototype.setThumbnail = function (origen, destino, res){
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 	request({
 
 				uri: 'https://'+hostSwissEdiWS+'/obteneSesionUsuarioMB?' + getParametroDinamico('yyyyddMM','') + '=clave&thumbnail=1&origen='+seguridadEDC.desencriptar(origen)+'&destino='+seguridadEDC.desencriptar(destino),
@@ -542,10 +542,10 @@ ServletWS.prototype.setThumbnail = function (origen, destino, res){
 
 					  res.send(body);
 					} else {
-					  res.send(body)
+					  res.send(body);
 					}
-			})
-}
+			});
+};
 
 
 ServletWS.prototype.validarReseteoPasswordImpl = function(codigo, captcha, condicion,ipaddress, res){
@@ -560,7 +560,7 @@ ServletWS.prototype.validarReseteoPasswordImpl = function(codigo, captcha, condi
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 	request({
 				uri: "https://"+hostSwissEdiWS+"/obteneSesionUsuarioMB?"+getParametroCodigo()+"="+codigo+"&"+getParametroCondiciiones()+"="+condicion+"&"+getParametroCaptcha()+"="+captcha+"&ipaddress="+ipaddress,//?pagina=resultado&opcion=1&texto="+ruc,
 				method: "POST",
@@ -572,12 +572,12 @@ ServletWS.prototype.validarReseteoPasswordImpl = function(codigo, captcha, condi
 
 					  res.send(body);
 					} else {
-					  res.send(body)
+					  res.send(body);
 					}
-			})
+			});
 
 
-}
+};
 
 
 ServletWS.prototype.encriptarClaveYEnviarEmail = function(id, email, ip, usuario, respuesta){
@@ -592,7 +592,7 @@ ServletWS.prototype.encriptarClaveYEnviarEmail = function(id, email, ip, usuario
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 	request({
 				uri: "https://"+hostSwissEdiWS+"/obteneSesionUsuarioMB?"+getParametroDinamico('yyyyddMM','')+"=clave"+"&"+getParametroDinamico('ddMMyyyy','')+"="+id+"&"+getParametroDinamico('yyyyddMM','e')+"="+email+"&"+getParametroDinamico('ddyyyyMM','i')+"="+ip+"&"+getParametroDinamico('ddyyyyMM','u')+"="+usuario,//?pagina=resultado&opcion=1&texto="+ruc,
 				method: "POST",
@@ -603,12 +603,12 @@ ServletWS.prototype.encriptarClaveYEnviarEmail = function(id, email, ip, usuario
 					if (!error && response.statusCode == 200) {
 						respuesta(body);
 					} else {
-					  respuesta(error)
+					  respuesta(error);
 					}
-			})
+			});
 
 
-}
+};
 
 ServletWS.prototype.getInformacionArchivop12 = function(ruta,nombre,clave,empresa, respuesta){
 
@@ -622,7 +622,7 @@ ServletWS.prototype.getInformacionArchivop12 = function(ruta,nombre,clave,empres
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 	request({
 				uri: "https://"+hostSwissEdiWS+"/archivop12?"+getParametroDinamico('ddMMyyyy','a')+"="+ruta+"&"+getParametroDinamico('ddMMyyyy','b')+"="+nombre+"&"+getParametroDinamico('ddMMyyyy','c')+"="+clave+"&"+getParametroDinamico('ddMMyyyy','d')+"="+empresa,
 				method: "GET",
@@ -637,12 +637,12 @@ ServletWS.prototype.getInformacionArchivop12 = function(ruta,nombre,clave,empres
 
 					} else {
 
-					  respuesta(error)
+					  respuesta(error);
 					}
-			})
+			});
 
 
-}
+};
 
 ServletWS.prototype.actualizarWS = function(empresa, respuesta){
 
@@ -656,7 +656,7 @@ ServletWS.prototype.actualizarWS = function(empresa, respuesta){
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 	request({
 				uri: "https://"+hostSwissEdiWS+"/archivop12?"+getParametroDinamico('ddMMyyyy','aa')+"="+empresa+"&"+getParametroDinamico('ddMMyyyy','bb')+"=alien",
 				method: "GET",
@@ -671,12 +671,12 @@ ServletWS.prototype.actualizarWS = function(empresa, respuesta){
 
 					} else {
 
-					  respuesta(error)
+					  respuesta(error);
 					}
-			})
+			});
 
 
-}
+};
 
 
 
@@ -692,7 +692,7 @@ ServletWS.prototype.procesarRoborEdi = function(empresa, accion, codigo,respuest
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 	request({
 
 				uri: "https://"+hostSwissEdiWS+"/procesarRobots?clave=clave&empresa="+empresa+"&accion="+accion+"&codigo="+codigo,
@@ -705,12 +705,12 @@ ServletWS.prototype.procesarRoborEdi = function(empresa, accion, codigo,respuest
 
 					  respuesta(body);
 					} else {
-					  respuesta(body)
+					  respuesta(body);
 					}
-			})
+			});
 
 
-}
+};
 
 ServletWS.prototype.robotAdminEnviarNotificacion = function(codigo, respuesta){
 
@@ -724,7 +724,7 @@ ServletWS.prototype.robotAdminEnviarNotificacion = function(codigo, respuesta){
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 	request({
 
 				uri: "https://"+hostSwissEdiWS+"/procesarRobots?"+codigo,
@@ -737,12 +737,12 @@ ServletWS.prototype.robotAdminEnviarNotificacion = function(codigo, respuesta){
 
 					  respuesta(body);
 					} else {
-					  respuesta(body)
+					  respuesta(body);
 					}
-			})
+			});
 
 
-}
+};
 
 
 ServletWS.prototype.reseteoPasswordPaginaMovimiento = function reseteoPasswordPaginaMovimiento(codigo,clave,nuevaclave,renuevaclave,condiciones,verificar, respuesta){
@@ -758,7 +758,7 @@ console.log("reseteoPasswordPaginaMovimiento");
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 	request({
 				uri: "https://"+hostSwissEdiWS+"/obteneSesionUsuarioMB?"+getParametroCodigo()+"="+codigo+"&"+getParametroClave()+"="+clave+"&"+getParametroNuevaClave()+"="+nuevaclave+"&"+getParametroReNuevaClave()+"="+renuevaclave+"&"+getParametroDinamico('ddyyyyMM','v')+"="+verificar,//?pagina=resultado&opcion=1&texto="+ruc,
 				method: "POST",
@@ -771,12 +771,12 @@ console.log("reseteoPasswordPaginaMovimiento");
 
 					  respuesta(body);
 					} else {
-					  respuesta(body)
+					  respuesta(body);
 					}
-			})
+			});
 
 
-}
+};
 
 ServletWS.prototype.enviarArchivoXmlWS = function (attachments_, clave, respuesta){
 
@@ -790,7 +790,7 @@ ServletWS.prototype.enviarArchivoXmlWS = function (attachments_, clave, respuest
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 	//var source = fs.createReadStream('swissedi1031.xml');
 	//source.pipe(
 	var formData = {
@@ -820,18 +820,18 @@ ServletWS.prototype.enviarArchivoXmlWS = function (attachments_, clave, respuest
 							respuesta(body);
 						}
 
-					}catch(error){
+					}catch(errores){
 						respuesta(body);
-						console.log(error);
+						console.log(errores);
 					}
 
 					return;
 
 
-			})
+			});
 	//)
 
-}
+};
 
 
 
@@ -847,7 +847,7 @@ ServletWS.prototype.enviarArchivosWS = function enviarArchivosWS(attachments_, c
 	'Cookie':'JSESSIONID=B2D4124FF866E5F4C6033A63D07B545D',
 	'Host':'localhost',
 	'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-	}
+};
 	//var source = fs.createReadStream('swissedi1031.xml');
 	//source.pipe(
 	var formData = {
@@ -881,18 +881,18 @@ ServletWS.prototype.enviarArchivosWS = function enviarArchivosWS(attachments_, c
 							respuesta(JSON.parse(body));
 						}
 
-					}catch(error){
+					}catch(errores){
 						respuesta(body);
-						console.log(error);
+						console.log(errores);
 					}
 
 					return;
 
 
-			})
+			});
 	//)
 
-}
+};
 
 
 /**********************************************
@@ -902,10 +902,10 @@ function transfomrarTablaToArray(tabla){
 
 var datos = tabla.split("<tr>");
    datos.shift();
-	var datos2;
-  var datos3={};
-  for(var i=0;i<datos.length;i++){
-		var datos2 = datos[i].split("<td>");
+   var datos2;
+   var datos3={};
+   for(var i=0;i<datos.length;i++){
+		datos2 = datos[i].split("<td>");
 		if( datos2[0] && datos2[1] ){
 		if(datos2[0].indexOf('colspan')<0 && datos2[0].indexOf('width')<0){
 
@@ -928,7 +928,7 @@ var datos = tabla.split('<tr >');
 	var datos2;
   var datos3={};
   for(var i=0;i<datos.length;i++){
-		var datos2 = datos[i].split("<td>");
+		datos2 = datos[i].split("<td>");
 		if( datos2[0] && datos2[1] ){
 		//if(datos2[0].indexOf('row')<0 && datos2[0].indexOf('width')<0){
 
@@ -1043,22 +1043,22 @@ function transfomrarTablaToArrayMetodo3(datos){
 
 						//Numero de autorizacion
 						valor = valor.trim();
-                        datosJson["claveAcceso"]=valor.split(":::")[0].replace("CA:","").trim();
-                        datosJson["numeroAutorizacion"]=valor.split(":::")[1].replace("NA:","").trim();
+                        datosJson.claveAcceso=valor.split(":::")[0].replace("CA:","").trim();
+                        datosJson.numeroAutorizacion=valor.split(":::")[1].replace("NA:","").trim();
 					}else{
 						if(key === "razonSocial"){
                         	valor = valor.trim();
-                            datosJson["ruc"]=valor.split(":::")[0].trim();
-                            datosJson["razonSocial"]=valor.split(":::")[1].trim();
+                            datosJson.ruc=valor.split(":::")[0].trim();
+                            datosJson.razonSocial=valor.split(":::")[1].trim();
                         }else{
                         	if(key === "documento"){
                                //Clave de acceso
                                //Numero de autorizacion
                                valor = valor.trim();
-                               datosJson["serie"]=valor.split("  ")[1].split("-")[0]+valor.split("  ")[1].split("-")[1].trim();
-                               datosJson["comprobante"]=valor.split("  ")[1].split("-")[2].trim();
-                               datosJson["documento"]=valor.split("  ")[1];
-                               datosJson["tipoDocumento"]=valor.split("  ")[0];
+                               datosJson.serie=valor.split("  ")[1].split("-")[0]+valor.split("  ")[1].split("-")[1].trim();
+                               datosJson.comprobante=valor.split("  ")[1].split("-")[2].trim();
+                               datosJson.documento=valor.split("  ")[1];
+                               datosJson.tipoDocumento=valor.split("  ")[0];
                             }else{
 								valor = valor.trim();
                        			datosJson[key]=valor;
@@ -1070,8 +1070,8 @@ function transfomrarTablaToArrayMetodo3(datos){
 
             }
 		}
-		if(datosJson && datosJson["id"]){
-			lista.push(datosJson)
+		if(datosJson && datosJson.id){
+			lista.push(datosJson);
 		}
 
 
@@ -1103,7 +1103,7 @@ var headers = {
 	'Connection':'keep-alive',
 	'Content-Length':'45',
 	'Cookie':'JSESSIONID=feXyogGV1Ov9CWbSvpWb1g**.sriint05; __utma=188394346.1414492352.1419866942.1419871610.1419874981.3; __utmb=188394346.1.10.1419874981; __utmc=188394346; __utmz=188394346.1419866942.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; __utma=246370193.1217165655.1419866977.1419872203.1419875585.3; __utmb=246370193.1.10.1419875585; __utmc=246370193; __utmz=246370193.1419875585.3.3.utmcsr=sri.gob.ec|utmccn=(referral)|utmcmd=referral|utmcct=/web/guest/home'
-}
+};
     request({
 		uri: "https://declaraciones.sri.gob.ec/facturacion-internet/consultas/publico/ruc-datos2.jspa?ruc="+ruc,
 		method: "POST",
@@ -1143,7 +1143,7 @@ var headers = {
 
    });
    //
-}
+};
 
 
 ServletWS.prototype.getInfoCedula = function getInfoCedula(identificacion, resultado){
@@ -1164,7 +1164,7 @@ ServletWS.prototype.getInfoCedula = function getInfoCedula(identificacion, resul
 		//'Cookie':'csfcfc=_1495Xfn; COOKIE_SUPPORT=true; JSESSIONID=node2~3492DB2AD74470137BFDEB68EF55A1E1.nodo2; GUEST_LANGUAGE_ID=es_ES; __utmt=1; __utma=175726519.1690206560.1427945570.1427945570.1429445698.2; __utmb=175726519.23.10.1429445698; __utmc=175726519; __utmz=175726519.1429445698.2.2.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided)',
 		'Host':'www.datoseguro.gob.ec',
 		'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36'
-	}
+	};
 
 
 	request.get({
@@ -1181,13 +1181,13 @@ ServletWS.prototype.getInfoCedula = function getInfoCedula(identificacion, resul
 				}
 
 		}else{
-			resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',error:true})
+			resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',error:true});
 			return;
 		}
 
 		if(!ViewState){
 
-			resultado({encontrado:false, mensaje:'Datos del cliente no ha sido verificados, debido a que el servidor validador de la cedula no responde',error:true})
+			resultado({encontrado:false, mensaje:'Datos del cliente no ha sido verificados, debido a que el servidor validador de la cedula no responde',error:true});
 			return;
 		}
 		if(response && response.statusCode == 200 ){//Siginifica que esta logoneado al sistema
@@ -1198,11 +1198,11 @@ ServletWS.prototype.getInfoCedula = function getInfoCedula(identificacion, resul
 			var heads = response.request.headers;
 			//heads['Accept-Encoding']='gzip, deflate, sdch';
 			heads['Content-Type'] = 'application/x-www-form-urlencoded; charset=iso-8859-1';
-			heads['Accept'] = 'application/xml, text/xml, */*; q=0.01';
-			heads['Origin'] = 'https://www.datoseguro.gob.ec';
-			heads['Referer'] = 'https://www.datoseguro.gob.ec/web/guest/consulta-cne';
+			heads.Accept = 'application/xml, text/xml, */*; q=0.01';
+			heads.Origin = 'https://www.datoseguro.gob.ec';
+			heads.Referer = 'https://www.datoseguro.gob.ec/web/guest/consulta-cne';
 			heads['X-Requested-With'] = 'XMLHttpRequest';
-			heads['Cookie'] = 'csfcfc=_1495Xfn; COOKIE_SUPPORT=true; '+response.headers['set-cookie'][0]
+			heads.Cookie = 'csfcfc=_1495Xfn; COOKIE_SUPPORT=true; '+response.headers['set-cookie'][0];
 
 			request({
 				uri: "https://186.101.75.60/web/guest/consulta-cne?p_p_id=consultapublica_WAR_consultapublica10&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1&_consultapublica_WAR_consultapublica10__jsfBridgeAjax=true&_consultapublica_WAR_consultapublica10__facesViewIdResource=%2Fviews%2Fview.xhtml&javax.faces.partial.ajax=true&javax.faces.source=A0945%3AformConsultaPublica%3Aj_idt12&javax.faces.partial.execute=%40all&javax.faces.partial.render=A0945%3AformConsultaPublica%3AmsnMatriz+A0945%3AformConsultaPublica%3AmessageCedula&A0945%3AformConsultaPublica%3Aj_idt12=A0945%3AformConsultaPublica%3Aj_idt12&A0945%3AformConsultaPublica=A0945%3AformConsultaPublica&javax.faces.encodedURL=https%3A%2F%2Fwww.datoseguro.gob.ec%2Fweb%2Fguest%2Fconsulta-cne%3Fp_p_id%3Dconsultapublica_WAR_consultapublica10%26p_p_lifecycle%3D2%26p_p_state%3Dnormal%26p_p_mode%3Dview%26p_p_cacheability%3DcacheLevelPage%26p_p_col_id%3Dcolumn-1%26p_p_col_count%3D1%26_consultapublica_WAR_consultapublica10__jsfBridgeAjax%3Dtrue%26_consultapublica_WAR_consultapublica10__facesViewIdResource%3D%252Fviews%252Fview.xhtml&A0945%3AformConsultaPublica%3AinputTextCedula="+identificacion+"&javax.faces.ViewState="+ViewState,
@@ -1232,24 +1232,24 @@ ServletWS.prototype.getInfoCedula = function getInfoCedula(identificacion, resul
 							}, function(error, response, body) {
 
 								if(body && body.indexOf('disponible temporalmente')>=0){
-									resultado({encontrado:false,mensaje:'No disponible, por favor vuelva a intentarlo',mostrarBoxAlternos:true})
+									resultado({encontrado:false,mensaje:'No disponible, por favor vuelva a intentarlo',mostrarBoxAlternos:true});
 								}else{
 									if(body && body.indexOf(identificacion)>=0 && body.split('<div class="ui-datatable-tablewrapper">') && body.split('<div class="ui-datatable-tablewrapper">')[1] && body.split('<div class="ui-datatable-tablewrapper">')[1].split('</div>') && body.split('<div class="ui-datatable-tablewrapper">')[1].split('</div>')[0]){
 										resultado(body.split('<div class="ui-datatable-tablewrapper">')[1].split('</div>')[0].replace('<table role="grid">','<table id="datos-cne" >')); //imprime el resultado en pantalla
 
 									}else{
 										if(body && body.indexOf('No se puede consultar')>=0){
-											resultado({encontrado:false, mensaje:'No se puede consultar el numero de cedula '+identificacion, mostrarBoxAlternos:true})
+											resultado({encontrado:false, mensaje:'No se puede consultar el numero de cedula '+identificacion, mostrarBoxAlternos:true});
 										}else{
 											if(body && body.indexOf('No hay registros disponibles')>=0){
 
-												resultado({encontrado:false, mensaje:'No hay registros disponibles con la identificacion '+identificacion,cancelar:true})
+												resultado({encontrado:false, mensaje:'No hay registros disponibles con la identificacion '+identificacion,cancelar:true});
 											}else{
 												if(!body){
-													console.log('body undefined')
-													resultado({encontrado:false, mensaje:'No se obtuvo respuesta del servidor, por favor vuelva a intentar',mostrarBoxAlternos:true})
+													console.log('body undefined');
+													resultado({encontrado:false, mensaje:'No se obtuvo respuesta del servidor, por favor vuelva a intentar',mostrarBoxAlternos:true});
 												}else{
-													resultado({encontrado:false, mensaje:'No se puede consultar el numero de cedula',mostrarBoxAlternos:true})
+													resultado({encontrado:false, mensaje:'No se puede consultar el numero de cedula',mostrarBoxAlternos:true});
 												}
 											}
 
@@ -1260,10 +1260,10 @@ ServletWS.prototype.getInfoCedula = function getInfoCedula(identificacion, resul
 
 								}
 
-							})
+							});
 						}else{
 						   console.log('Exception');
-							resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',mostrarBoxAlternos:true})
+							resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',mostrarBoxAlternos:true});
 						}
 						/*}catch(error){
 
@@ -1271,23 +1271,23 @@ ServletWS.prototype.getInfoCedula = function getInfoCedula(identificacion, resul
 							resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',mostrarBoxAlternos:true})
 						}*/
 					}else{
-						resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',mostrarBoxAlternos:true})
+						resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',mostrarBoxAlternos:true});
 					}
 
-			})
+			});
 			}catch(error){
 				console.log(error);
-				resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',mostrarBoxAlternos:true})
+				resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',mostrarBoxAlternos:true});
 
 			}
 		}else{
 			console.log(error);
-			resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',error:true})
+			resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',error:true});
 		}
 
 	});
 
-}//fin function getInfoCedula
+};//fin function getInfoCedula
 
 ServletWS.prototype.getInfoCedula2 = function getInfoCedula2(identificacion, resultado){
 
@@ -1307,7 +1307,7 @@ ServletWS.prototype.getInfoCedula2 = function getInfoCedula2(identificacion, res
 		//'Cookie':'csfcfc=_1495Xfn; COOKIE_SUPPORT=true; JSESSIONID=node2~3492DB2AD74470137BFDEB68EF55A1E1.nodo2; GUEST_LANGUAGE_ID=es_ES; __utmt=1; __utma=175726519.1690206560.1427945570.1427945570.1429445698.2; __utmb=175726519.23.10.1429445698; __utmc=175726519; __utmz=175726519.1429445698.2.2.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided)',
 		'Host':'www.datoseguro.gob.ec',
 		'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36'
-	}
+	};
 
 
 	request.get({
@@ -1324,13 +1324,13 @@ ServletWS.prototype.getInfoCedula2 = function getInfoCedula2(identificacion, res
 				}
 
 		}else{
-			resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',error:true})
+			resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',error:true});
 			return;
 		}
 
 		if(!ViewState){
 
-			resultado({encontrado:false, mensaje:'Datos del cliente no ha sido verificados, debido a que el servidor validador de la cedula no responde',error:true})
+			resultado({encontrado:false, mensaje:'Datos del cliente no ha sido verificados, debido a que el servidor validador de la cedula no responde',error:true});
 			return;
 		}
 		if(response && response.statusCode == 200 ){//Siginifica que esta logoneado al sistema
@@ -1341,11 +1341,11 @@ ServletWS.prototype.getInfoCedula2 = function getInfoCedula2(identificacion, res
 			var heads = response.request.headers;
 			//heads['Accept-Encoding']='gzip, deflate, sdch';
 			heads['Content-Type'] = 'application/x-www-form-urlencoded; charset=iso-8859-1';
-			heads['Accept'] = 'application/xml, text/xml, */*; q=0.01';
-			heads['Origin'] = 'https://www.datoseguro.gob.ec';
-			heads['Referer'] = 'https://www.datoseguro.gob.ec/web/guest/consulta-cne';
+			heads.Accept = 'application/xml, text/xml, */*; q=0.01';
+			heads.Origin = 'https://www.datoseguro.gob.ec';
+			heads.Referer = 'https://www.datoseguro.gob.ec/web/guest/consulta-cne';
 			heads['X-Requested-With'] = 'XMLHttpRequest';
-			heads['Cookie'] = 'csfcfc=_1495Xfn; COOKIE_SUPPORT=true; '+response.headers['set-cookie'][0]
+			heads.Cookie = 'csfcfc=_1495Xfn; COOKIE_SUPPORT=true; '+response.headers['set-cookie'][0];
 
 			request({
 				uri: "https://186.101.75.60/web/guest/consulta-cne?p_p_id=consultapublica_WAR_consultapublica10&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1&_consultapublica_WAR_consultapublica10__jsfBridgeAjax=true&_consultapublica_WAR_consultapublica10__facesViewIdResource=%2Fviews%2Fview.xhtml&javax.faces.partial.ajax=true&javax.faces.source=A0945%3AformConsultaPublica%3Aj_idt12&javax.faces.partial.execute=%40all&javax.faces.partial.render=A0945%3AformConsultaPublica%3AmsnMatriz+A0945%3AformConsultaPublica%3AmessageCedula&A0945%3AformConsultaPublica%3Aj_idt12=A0945%3AformConsultaPublica%3Aj_idt12&A0945%3AformConsultaPublica=A0945%3AformConsultaPublica&javax.faces.encodedURL=https%3A%2F%2Fwww.datoseguro.gob.ec%2Fweb%2Fguest%2Fconsulta-cne%3Fp_p_id%3Dconsultapublica_WAR_consultapublica10%26p_p_lifecycle%3D2%26p_p_state%3Dnormal%26p_p_mode%3Dview%26p_p_cacheability%3DcacheLevelPage%26p_p_col_id%3Dcolumn-1%26p_p_col_count%3D1%26_consultapublica_WAR_consultapublica10__jsfBridgeAjax%3Dtrue%26_consultapublica_WAR_consultapublica10__facesViewIdResource%3D%252Fviews%252Fview.xhtml&A0945%3AformConsultaPublica%3AinputTextCedula="+identificacion+"&javax.faces.ViewState="+ViewState,
@@ -1375,24 +1375,24 @@ ServletWS.prototype.getInfoCedula2 = function getInfoCedula2(identificacion, res
 							}, function(error, response, body) {
 
 								if(body && body.indexOf('disponible temporalmente')>=0){
-									resultado({encontrado:false,mensaje:'No disponible, por favor vuelva a intentarlo',mostrarBoxAlternos:true})
+									resultado({encontrado:false,mensaje:'No disponible, por favor vuelva a intentarlo',mostrarBoxAlternos:true});
 								}else{
 									if(body && body.indexOf(identificacion)>=0 && body.split('<div class="ui-datatable-tablewrapper">') && body.split('<div class="ui-datatable-tablewrapper">')[1] && body.split('<div class="ui-datatable-tablewrapper">')[1].split('</div>') && body.split('<div class="ui-datatable-tablewrapper">')[1].split('</div>')[0]){
 										resultado(transfomrarTablaToArrayMetodo2(body.split('<div class="ui-datatable-tablewrapper">')[1].split('</div>')[0].replace('<table role="grid">','<table id="datos-cne" >'))); //imprime el resultado en pantalla
 
 									}else{
 										if(body && body.indexOf('No se puede consultar')>=0){
-											resultado({encontrado:false, mensaje:'No se puede consultar el numero de cedula '+identificacion, mostrarBoxAlternos:true})
+											resultado({encontrado:false, mensaje:'No se puede consultar el numero de cedula '+identificacion, mostrarBoxAlternos:true});
 										}else{
 											if(body && body.indexOf('No hay registros disponibles')>=0){
 
-												resultado({encontrado:false, mensaje:'No hay registros disponibles con la identificacion '+identificacion,cancelar:true})
+												resultado({encontrado:false, mensaje:'No hay registros disponibles con la identificacion '+identificacion,cancelar:true});
 											}else{
 												if(!body){
-													console.log('body undefined')
-													resultado({encontrado:false, mensaje:'No se obtuvo respuesta del servidor, por favor vuelva a intentar',mostrarBoxAlternos:true})
+													console.log('body undefined');
+													resultado({encontrado:false, mensaje:'No se obtuvo respuesta del servidor, por favor vuelva a intentar',mostrarBoxAlternos:true});
 												}else{
-													resultado({encontrado:false, mensaje:'No se puede consultar el numero de cedula',mostrarBoxAlternos:true})
+													resultado({encontrado:false, mensaje:'No se puede consultar el numero de cedula',mostrarBoxAlternos:true});
 												}
 											}
 
@@ -1403,10 +1403,10 @@ ServletWS.prototype.getInfoCedula2 = function getInfoCedula2(identificacion, res
 
 								}
 
-							})
+							});
 						}else{
 						   console.log('Exception');
-							resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',mostrarBoxAlternos:true})
+							resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',mostrarBoxAlternos:true});
 						}
 						/*}catch(error){
 
@@ -1414,23 +1414,23 @@ ServletWS.prototype.getInfoCedula2 = function getInfoCedula2(identificacion, res
 							resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',mostrarBoxAlternos:true})
 						}*/
 					}else{
-						resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',mostrarBoxAlternos:true})
+						resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',mostrarBoxAlternos:true});
 					}
 
-			})
+			});
 			}catch(error){
 				console.log(error);
-				resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',mostrarBoxAlternos:true})
+				resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',mostrarBoxAlternos:true});
 
 			}
 		}else{
 			console.log(error);
-			resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',error:true})
+			resultado({encontrado:false, mensaje:'No disponible, por favor vuelva a intentarlo',error:true});
 		}
 
 	});
 
-}//fin function getInfoCedula
+};//fin function getInfoCedula
 
 /****************
 CONSULTA DE COMPROBANTES ELECTRONICOS EN EL SRI
@@ -1439,12 +1439,12 @@ a) Se hace un request al https://declaraciones.sri.gob.ec/tuportal-internet envi
 b) Una vez ingresado, se hace el login respectivo
 ******************/
 ServletWS.prototype.getInfoComprobantesElectronicosRecibidos = function(identificacion, ci, clave, busqueda, directorio,clienteComunicion, fechainicio, resultadoComprobantes){
-	console.log("Llama getInfoComprobantesElectronicosRecibidos "+(new Date()))
+	console.log("Llama getInfoComprobantesElectronicosRecibidos ",(new Date()));
 	var pasos = 9;
 	try{if(clienteComunicion){
     clienteComunicion.send(JSON.stringify({mensajerdsri:"INICIANDO LA COMUNICACION CON EL SRI",error:false}));
-    }}catch(error001){console.log(error001)}
-	var j = request.jar()
+}}catch(error001){console.log(error001);}
+	var j = request.jar();
 	var url = 'https://declaraciones.sri.gob.ec/tuportal-internet';
     request({url: url, jar: j}, function () {
     	var cookie_string = j.getCookieString(url);
@@ -1457,11 +1457,11 @@ ServletWS.prototype.getInfoComprobantesElectronicosRecibidos = function(identifi
          	  	jar: j,
 				}, function(error, response1, body){
 					if(error){
-                    	console.log(error)
+                    	console.log(error);
                     	resultadoComprobantes(false, "DESCONECTADO, EN EL PRIMER LOGIN, SE ECONTRO UN ERROR");
                     	try{if(clienteComunicion){
                     	clienteComunicion.send(JSON.stringify({mensajerdsri:"DESCONECTADO, EN EL PRIMER LOGIN, SE ECONTRO UN ERROR",errorsri:true,errormensaje:error}));
-                    	}}catch(error001){console.log(error001)}
+                    }}catch(error001){console.log(error001);}
                         return;
                     }
 					//Segun la pagina existe un campo llamado estadoUsuario, que determina si esta ingresado(Usuario >>identificacion) o no(>>Desconectado)
@@ -1471,7 +1471,7 @@ ServletWS.prototype.getInfoComprobantesElectronicosRecibidos = function(identifi
          				resultadoComprobantes(false, "DESCONECTADO POR FAVOR REVISE LA IDIENTIFICACION Y LA CLAVE");
          				try{if(clienteComunicion){
          				clienteComunicion.send(JSON.stringify({mensajerdsri:"DESCONECTADO, POR FAVOR REVISE LA IDIENTIFICACION Y LA CLAVE",errorsri:true}));
-         				}}catch(error001){console.log(error001)}
+                    }}catch(error001){console.log(error001);}
          				return;
          			}
          			//Estado Conectado
@@ -1479,15 +1479,15 @@ ServletWS.prototype.getInfoComprobantesElectronicosRecibidos = function(identifi
          				console.log("Estado CONECTADO * 1/"+pasos);
          				try{if(clienteComunicion){
          				clienteComunicion.send(JSON.stringify({mensajerdsri:"CONECTADO AL SRI :: 1/"+pasos,errorsri:false}));
-         				}}catch(error001){console.log(error001)}
+                    }}catch(error001){console.log(error001);}
          				//Una vez ingresado se verifica si existe el menu CONSULTA COMPROBANTES ELECTRONICOS
          				//Es importante ya que este contiene un submenu que nos permite redirigirnos al url princiapl con un token
 						if(body && body.indexOf("CONSULTA COMPROBANTES ELECTRONICOS")>=0){
 							try{if(clienteComunicion){
 							clienteComunicion.send(JSON.stringify({mensajerdsri:"MENU::CONSULTA COMPROBANTES ELECTRONICOS, ACTIVADO :: 2/"+pasos,errorsri:false}));
-							 }}catch(error001){console.log(error001)}
+                        }}catch(error001){console.log(error001);}
 							//Obteniendo el submenu, para esto se hace una busqueda dentro del menu CONSULTA COMPROBANTES ELECTRONICOS
-							var parametro = body.split("CONSULTA COMPROBANTES ELECTRONICOS")[0].split("cambiarSigno")[body.split("CONSULTA COMPROBANTES ELECTRONICOS")[0].split("cambiarSigno").length-1].split("parameters:")[1].split("})")[0].split(",")[0]
+							var parametro = body.split("CONSULTA COMPROBANTES ELECTRONICOS")[0].split("cambiarSigno")[body.split("CONSULTA COMPROBANTES ELECTRONICOS")[0].split("cambiarSigno").length-1].split("parameters:")[1].split("})")[0].split(",")[0];
 							parametro = parametro.replace("'","").replace("'","");
 							//Una vez obtenido el parametro, se lo inserta al final de la siguiente url para recien obtener el link a consultas de comprobantes
 							request({
@@ -1497,14 +1497,14 @@ ServletWS.prototype.getInfoComprobantesElectronicosRecibidos = function(identifi
 								}, function(error, response13, body3){
 
 									if(error){
-                                         console.log(error)
+                                         console.log(error);
                                          if(response13 && response13.request && response13.request.headers){
                                         	 getInfoComprobantesElectronicosRecibidosLogout(response13.request.headers);
                                          }
                                          resultadoComprobantes(false, "ERROR, DESPUES DE HACER EL LOGIN Y QUERE CONSULTAR EL LINK");
                                          try{if(clienteComunicion){
                                          clienteComunicion.send(JSON.stringify({mensajerdsri:"ERROR, DESPUES DE HACER EL LOGIN Y QUERE CONSULTAR EL LINK",errorsri:true, errormensaje:error}));
-                                         }}catch(error001){console.log(error001)}
+                                     }}catch(error001){console.log(error001);}
                                          return;
                                      }
                                      console.log("Estado CONECTADO* menus");
@@ -1512,7 +1512,7 @@ ServletWS.prototype.getInfoComprobantesElectronicosRecibidos = function(identifi
 									if(body3 && body3.indexOf("COMPROBANTES ELECTRONICOS RECIBIDOS")>=0){
 										try{if(clienteComunicion){
 										clienteComunicion.send(JSON.stringify({mensajerdsri:"SUMENU:: COMPROBANTES ELECTRONICOS RECIBIDOS ACTIVADO :: 3/"+pasos,errorsri:false}));
-										}}catch(error001){console.log(error001)}
+                                    }}catch(error001){console.log(error001);}
 										var hrefs = body3.split("href");
 										//Buscando los links, estos links son los subemuns de CONSULTA COMPROBANTES ELECTRONICOS
 										//Ejemplo:
@@ -1531,21 +1531,21 @@ ServletWS.prototype.getInfoComprobantesElectronicosRecibidos = function(identifi
 												//Haciendo el 4 request
 												try{if(clienteComunicion){
                                                 clienteComunicion.send(JSON.stringify({mensajerdsri:"INGRESANDO A LA PANTALLA DE CONSULTAS ... :: 4/"+pasos,errorsri:false}));
-                                                }}catch(error001){console.log(error001)}
+                                            }}catch(error001){console.log(error001);}
 												request({
 													url:hrefs[i],
 													method: "GET",
 													jar: j,
 													}, function(error, response14, body4){
 															if(error){
-                                                            	console.log(error)
+                                                            	console.log(error);
                                                             	if(response14 && response14.request && response14.request.headers){
                                                             		getInfoComprobantesElectronicosRecibidosLogout(response14.request.headers);
                                                             	}
 
                                                             	try{if(clienteComunicion){
                                                                 clienteComunicion.send(JSON.stringify({mensajerdsri:"ERROR, AL INGRESAR A LA PANTALLA DE CONSULTAS",errorsri:true,errormensaje:error}));
-                                                                }}catch(error001){console.log(error001)}
+                                                            }}catch(error001){console.log(error001);}
 
                                                                 resultadoComprobantes(false, "ERROR, AL INGRESAR A LA PANTALLA DE CONSULTAS :: 4/"+pasos);
                                                                 return;
@@ -1563,21 +1563,21 @@ ServletWS.prototype.getInfoComprobantesElectronicosRecibidos = function(identifi
 																	headers:response14.request.headers,
 																	}, function(error, response15, body5){
 																			if(error){
-																				console.log(error)
+																				console.log(error);
 																				if(response14 && response14.request && response14.request.headers){
 																					getInfoComprobantesElectronicosRecibidosLogout(response14.request.headers);
 																				}
 
 																				try{if(clienteComunicion){
 																				clienteComunicion.send(JSON.stringify({mensajerdsri:"DESCONECTADO, EN LA PANTALLA DE CONSULTAS ::4/"+pasos,errorsri:true,errormensaje:error}));
-																				}}catch(error001){console.log(error001)}
+                                                                            }}catch(error001){console.log(error001);}
 																				resultadoComprobantes(false, "DESCONECTADO, EN LA PANTALLA DE CONSULTAS ::4/"+pasos);
 
                                                                                 return;
 																			}
 																			try{if(clienteComunicion){
 																			clienteComunicion.send(JSON.stringify({mensajerdsri:"SEGUNDO LOGIN EXISTOSO::PANTALLA DE CONSULTAS :: 5/"+pasos,errorsri:false}));
-																			}}catch(error001){console.log(error001)}
+                                                                        }}catch(error001){console.log(error001);}
 																			console.log("Estado CONECTADO 2");
 																			var ViewState  = "";
 																			var anio=busqueda.anio;
@@ -1593,7 +1593,7 @@ ServletWS.prototype.getInfoComprobantesElectronicosRecibidos = function(identifi
 																				ViewState = ViewState.replace('"','').trim().replace(":",'%3A').replace("","");
 																			}
 																			if(!ViewState){
-                                                                            	console.log(error)
+                                                                            	console.log(error);
                                                                             	if(response14 && response14.request && response14.request.headers){
                                                                             		getInfoComprobantesElectronicosRecibidosLogout(response14.request.headers);
                                                                             	}
@@ -1601,13 +1601,13 @@ ServletWS.prototype.getInfoComprobantesElectronicosRecibidos = function(identifi
 
                                                                             	try{if(clienteComunicion){
                                                                             	clienteComunicion.send(JSON.stringify({mensajerdsri:"LO SENTIMOS NO SE ENCONTRO UN VIEWSTATE EN LA PANTALLA DE CONSULTAS, POR FAVOR VUELVA A INTERLO.. ::5/"+pasos,errorsri:true}));
-                                                                            	}}catch(error001){console.log(error001)}
+                                                                            }}catch(error001){console.log(error001);}
                                                                             	resultadoComprobantes(false, "LO SENTIMOS NO SE ENCONTRO UN VIEWSTATE EN LA PANTALLA DE CONSULTAS, POR FAVOR VUELVA A INTERLO.. ::5/"+pasos);
                                                                                 return;
                                                                             }
                                                                             try{if(clienteComunicion){
                                                                             clienteComunicion.send(JSON.stringify({mensajerdsri:"REALIZANDO LA CONSULTA...::6/"+pasos,errorsri:false}));
-                                                                            }}catch(error001){console.log(error001)}
+                                                                        }}catch(error001){console.log(error001);}
                                                                             //Una vez hallado el viewstate se envian los parametros(anio, mes, dia) para obtener los comprobantes recibidos
                                                                             var paginacion="";//&frmPrincipal%3AtablaCompRecibidos_pagination=true&frmPrincipal%3AtablaCompRecibidos_first=0&frmPrincipal%3AtablaCompRecibidos_rows=200&frmPrincipal%3AtablaCompRecibidos_encodeFeature=true"
 																			request({
@@ -1617,13 +1617,13 @@ ServletWS.prototype.getInfoComprobantesElectronicosRecibidos = function(identifi
 																				}, function(error, response16, body6){
 																						//MonitorArchivos.grabarLogsObserver('logCron.txt',body6);
 																						if(error){
-                                                                                        	console.log(error)
+                                                                                        	console.log(error);
                                                                                         	if(response14 && response14.request && response14.request.headers){
                                                                                         		getInfoComprobantesElectronicosRecibidosLogout(response14.request.headers);
                                                                                         	}
                                                                                         	try{if(clienteComunicion){
                                                                                             clienteComunicion.send(JSON.stringify({mensajerdsri:"ERROR AL CONSULTAR LOS COMPROBANTES ELECTRONICOS DE RECEPCION ::6/"+pasos,errorsri:true,errormensaje:error}));
-                                                                                            }}catch(error001){console.log(error001)}
+                                                                                        }}catch(error001){console.log(error001);}
                                                                                         	resultadoComprobantes(false, "ERROR AL CONSULTAR LOS COMPROBANTES ELECTRONICOS DE RECEPCION ::6/"+pasos);
 
                                                                                             return;
@@ -1634,10 +1634,10 @@ ServletWS.prototype.getInfoComprobantesElectronicosRecibidos = function(identifi
                                                                                         var utlConsultaArchivoText = "https://declaraciones.sri.gob.ec/comprobantes-electronicos-internet/pages/consultas/recibidos/comprobantesRecibidos.jsf?frmPrincipal=frmPrincipal&frmPrincipal%3Aopciones=ruc&frmPrincipal%3Aano="+anio+"&frmPrincipal%3Ames="+mes+"&frmPrincipal%3Adia="+dia+"&frmPrincipal%3AcmbTipoComprobante="+doc+"&frmPrincipal%3AbtnBuscar=&javax.faces.ViewState="+ViewState+"&frmPrincipal%3AlnkTxtlistado=frmPrincipal%3AlnkTxtlistado";
 																						 try{if(clienteComunicion){
                                                                                          clienteComunicion.send(JSON.stringify({mensajerdsri:"CONSULTA REALIZADA POR FAVOR ESPERE ::7/"+pasos,errorsri:false}));
-                                                                                         }}catch(error001){console.log(error001)}
+                                                                                     }}catch(error001){console.log(error001);}
 																						 try{if(clienteComunicion){
                                                                                          clienteComunicion.send(JSON.stringify({mensajerdsri:"SE ESTA OBTENIENDO EL ARCHIVO DE REGISTROS ::8/"+pasos,errorsri:false}));
-                                                                                         }}catch(error001){console.log(error001)}
+                                                                                     }}catch(error001){console.log(error001);}
                                                                                         request({
                                                                                         	url: utlConsultaArchivoText,
                                                                                             method: "GET",
@@ -1650,17 +1650,17 @@ ServletWS.prototype.getInfoComprobantesElectronicosRecibidos = function(identifi
                                                                                                     MonitorArchivos.grabarLogsObserver('RecepcionDocumentos.txt',"Identificacion "+identificacion+" Registros obtenidos el "+(new Date()+" busqueda "+JSON.stringify(busqueda)));
                                                                                                     try{if(clienteComunicion){
                                                                                                     clienteComunicion.send(JSON.stringify({mensajerdsri:"ARCHIVO RECIBIDO EXITOSAMENTE ::9/"+pasos + " ...SEGUNDOS: "+((new Date().getTime()-fechainicio)/1000),errorsri:false}));
-                                                                                                    }}catch(error001){console.log(error001)}
+                                                                                                }}catch(error001){console.log(error001);}
                                                                                                     try{if(clienteComunicion){
                                                                                                     clienteComunicion.send(JSON.stringify({mensajerdsri:"LEYENDO EL ARCHIVO, POR FAVOR ESPERE...",errorsri:false}));
-                                                                                                    }}catch(error001){console.log(error001)}
+                                                                                                }}catch(error001){console.log(error001);}
 
                                                                                                     resultadoComprobantes(true, "ARCHIVO RECIBIDO EXITOSAMENTE ::9/"+pasos);
 
                                                                                                 }else{
                                                                                                 	try{if(clienteComunicion){
                                                                                                 	clienteComunicion.send(JSON.stringify({mensajerdsri:"001::Error al obtener los registros",errorsri:true,errormensaje:"Por favor intente otra vez"}));
-                                                                                                	}}catch(error001){console.log(error001)}
+                                                                                                }}catch(error001){console.log(error001);}
                                                                                                 	resultadoComprobantes(false, "001::Error al obtener los registros, por favor vuelva a intentar en unos segundos");
                                                                                                 }
 
@@ -1744,7 +1744,7 @@ ServletWS.prototype.getInfoComprobantesElectronicosRecibidos = function(identifi
 
 																	try{if(clienteComunicion){
 																	clienteComunicion.send(JSON.stringify({mensajerdsri:"NO SE CONTRARON LAS CREDENCIALES PARA EL SEGUNDO LOGIN",errorsri:true}));
-																	}}catch(error001){console.log(error001)}
+                                                                }}catch(error001){console.log(error001);}
                                                                  	resultadoComprobantes(false, "NO SE CONTRARON LAS CREDENCIALES PARA EL SEGUNDO LOGIN");
 
                                                              }//fin if
@@ -1758,7 +1758,7 @@ ServletWS.prototype.getInfoComprobantesElectronicosRecibidos = function(identifi
 											}
 											try{if(clienteComunicion){
 											clienteComunicion.send(JSON.stringify({mensajerdsri:"CONECTADO, PERO NO SE ENCONTRO EL MENU CONSULTA COMPROBANTES ELECTRONICOS EN EL TERCER LINK",errorsri:true}));
-											}}catch(error001){console.log(error001)}
+                                        }}catch(error001){console.log(error001);}
                                             resultadoComprobantes(false, "CONECTADO, PERO NO SE ENCONTRO EL MENU CONSULTA COMPROBANTES ELECTRONICOS EN EL TERCER LINK");
                                             return;
                                          }
@@ -1769,7 +1769,7 @@ ServletWS.prototype.getInfoComprobantesElectronicosRecibidos = function(identifi
 										try{
                                         if(clienteComunicion){
 										clienteComunicion.send(JSON.stringify({mensajerdsri:"CONECTADO, PERO NO SE ENCONTRO EL MENU CONSULTA COMPROBANTES ELECTRONICOS EN EL SEGUNDO LINK",errorsri:true}));
-										}}catch(error001){console.log(error001)}
+                                    }}catch(error001){console.log(error001);}
 										resultadoComprobantes(false, "CONECTADO, PERO NO SE ENCONTRO EL MENU CONSULTA COMPROBANTES ELECTRONICOS EN EL SEGUNDO LINK");
                                     	return;
                                     }//Fin if
@@ -1814,7 +1814,7 @@ ServletWS.prototype.getInfoComprobantesElectronicosRecibidos = function(identifi
         }); //Fin request
     });//Fin request
 
-}//fin function getInfoComprobantesElectronicosRecibidos
+};//fin function getInfoComprobantesElectronicosRecibidos
 function getInfoComprobantesElectronicosRecibidosLogout(headers){
 	request({
          uri: "https://declaraciones.sri.gob.ec/tuportal-internet/salir.jspa",
@@ -1846,7 +1846,7 @@ var headers = {
 	'Connection':'keep-alive',
 	'Content-Length':'45',
 	'Cookie':'JSESSIONID=feXyogGV1Ov9CWbSvpWb1g**.sriint05; __utma=188394346.1414492352.1419866942.1419871610.1419874981.3; __utmb=188394346.1.10.1419874981; __utmc=188394346; __utmz=188394346.1419866942.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; __utma=246370193.1217165655.1419866977.1419872203.1419875585.3; __utmb=246370193.1.10.1419875585; __utmc=246370193; __utmz=246370193.1419875585.3.3.utmcsr=sri.gob.ec|utmccn=(referral)|utmcmd=referral|utmcct=/web/guest/home'
-}
+};
     request({
 		uri: "https://declaraciones.sri.gob.ec/facturacion-internet/consultas/publico/ruc-datos2.jspa?ruc="+ruc,
 		method: "POST",
@@ -1886,7 +1886,7 @@ var headers = {
 
    });
    //
-}
+};
 
 
 

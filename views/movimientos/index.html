@@ -10,6 +10,9 @@
    <title>SwisSEdi::Systema de Documento Electrónicos</title>
    <script type="text/javascript" src="/recursos/angular/angular.min.js"></script>
 
+
+    <!-- NORMALIZE  https://necolas.github.io/normalize.css/-->
+    <link rel="stylesheet" href="/edi-docElectronicos/vendor/cssSwissEdi/normalize.css"/>
     <!-- Bootstrap core CSS -->
     <link href="/edi-docElectronicos/vendor/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/edi-docElectronicos/vendor/bootstrap-3.3.5/css/font-awesome.css" rel="stylesheet"/>
@@ -17,8 +20,16 @@
     <link href="/edi-docElectronicos/vendor/bootstrap-3.3.5/css/navbar-fixed-top.css" rel="stylesheet"/>
     <link href="/edi-docElectronicos/vendor/bootstrap-3.3.5/css/tooltip-viewport.css" rel="stylesheet"/>
     <link href="/edi-docElectronicos/vendor/bootstrap-3.3.5/css/sticky-footer.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/edi-docElectronicos/vendor/notificaciones/msgPop.css"/>
+    <link href="/pnotify/pnotify.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="/pnotify/pnotify.buttons.css" media="all" rel="stylesheet" type="text/css" />
+
+    <!--<link rel="stylesheet" href="/edi-docElectronicos/vendor/notificaciones/msgPop.css"/>-->
     <link rel="stylesheet" href="/edi-docElectronicos/vendor/cssSwissEdi/codigos.css"/>
+    <!--DATEPICKER -->
+    <link rel="stylesheet" href="/edi-docElectronicos/vendor/datepicker/datepicker.css"/>
+    <!--ngDialog -->
+    <link rel="stylesheet" href="/ngDialog/css/ngDialog.min.css"/>
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -27,11 +38,19 @@
     <![endif]-->
     <script type="text/javascript">
         var usuario = <%- JSON.stringify(user) %>;
+        console.log(usuario);
+        console.log(window.usuario);
     </script>
   </head>
 
   <body ng-app="uiRouterDocElectronicosMovimiento" ng-controller="EmpresasCrtl">
       <nav  class="navbar navbar-default navbar-fixed-top" style="background-color:#fff !important;" role="navigation">
+          <div class="progress" ng-show="blockprocesar" style="margin:15px 10px 0 0 !important;position: absolute;bottom: 0px;z-index: 10000;right: 5%;">
+            <div class="progress-bar progress-bar-striped active" role="progressbar"
+            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+              <span style="padding:10px;">{{acccion_a_procesar}}</span>
+          </div>
+        </div>
         <div class="container">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -48,12 +67,7 @@
 
           </div>
           <div id="navbar" class="navbar-collapse collapse">
-            <div class="progress" ng-show="blockprocesar" style="margin:15px 10px 0 0 !important;position: absolute;bottom: 0px;z-index: 10000;right: 5%;">
-  			  <div class="progress-bar progress-bar-striped active" role="progressbar"
-  			  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%">
-  				<span style="padding:10px;">{{acccion_a_procesar}}</span>
-  			</div>
-  		  </div>
+
             <ul class="nav navbar-nav navbar-right serifmenu">
 
   			<li class="dropdown resizewindowempresa " ng-show="cliente.cliente_proveedor || cliente.razonsocial" style="margin:3px 10px 0 0 !important;">
@@ -72,7 +86,7 @@
   			<li class="dropdown" data-ng-show="currentUsuario.username !='pikai'">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-fixed-width icon-caret-down"></i></a>
                   <ul class="dropdown-menu">
-                    <li ng-repeat="emisor in empresasCache"   ><a href="#" class="espaciosenblanco" ng-click="setCurrentEmpresa(emisor);control.busquedaAvanzada();"><img style="height:auto;width:50px;" ng-src="{{emisor.urllogo}}" /> &#187; {{emisor.descripcion}}</a></li>
+                    <li ng-repeat="emisor in empresasCache"   ><a ui-sref="menu.documentos({empresa_id:empresa.nombre})" class="espaciosenblanco" ng-click="setCurrentEmpresa(emisor);control.busquedaAvanzada();"><img style="height:auto;width:50px;" ng-src="{{emisor.urllogo}}" /> &#187; {{emisor.descripcion}}</a></li>
 
                     <li role="separator" class="divider"></li>
 
@@ -92,7 +106,33 @@
 			</select> -->
 		</div>
         <div ui-view ></div>
+
+
     </div>
+    <footer class="footerM">
+
+        <div id="rt-copyright" class="rt-overlay-dark" style="background-color:#e7e7e7">
+            <div class="rt-container">
+                <div class="rt-grid-4 rt-alpha">
+					<div class="rt-copyright-content rt-block">
+						© 2015 SwysSystem - Todos los Derechos Reservados.
+					</div>
+
+				</div>
+				<div class="rt-grid-4">
+					<div class="clear"></div>
+					<div class="rt-block">
+						<a href="#" id="gantry-totop" rel="nofollow"><span class="icon-angle-up rt-totop-icon"></span></a>
+					</div>
+
+				</div>
+				<div class="rt-grid-4 rt-omega">
+
+				</div>
+                <div class="clear"></div>
+            </div>
+     </div>
+    </footer>
      <!-- Bootstrap core JavaScript
      ================================================== -->
 
@@ -108,15 +148,43 @@
  <script type="text/javascript" src="/edi-docElectronicos/app/js/lib/librerias-core/angular-sanitize.min.js"></script>
  <script type="text/javascript" src="/recursos/angular-animate/angular-animate.min.js"></script>
  <script type="text/javascript" src="/edi-docElectronicos/app/js/lib/angular-states/angular-ui-router.min.js"></script>
+ <script type="text/javascript" src="/edi-docElectronicos/app/js/lib/librerias-core/mask.js"></script>
  <script type="text/javascript" src="/edi-docElectronicos/vendor/notificaciones/jquery.msgPop.js"></script>
+ <!--DETECTAR BROWSER -->
+ <script type="text/javascript" src="/edi-docElectronicos/jsminificado/detectarBrowser.js"></script>
+ <!--NOTIFICACIONES bootstrap-->
+ <!--<script type="text/javascript" src="/bootstrap-notify/bootstrap-notify.min.js"></script>-->
+ <script type="text/javascript" src="/pnotify/pnotify.js"></script>
+ <script type="text/javascript" src="/pnotify/pnotify.buttons.js"></script>
+
+
+ <!--ngDialog-->
+ <script type="text/javascript" src="/ngDialog/js/ngDialog.min.js"></script>
+
+
  <!--APP DEL MOVIMIENTO -->
  <script type="text/javascript" src="/edi-docElectronicos/app/js/movimientos/appMovimiento.js"></script>
  <script type="text/javascript" src="/edi-docElectronicos/jsminificado/servicios.min.js"></script>
  <script type="text/javascript" src="/edi-docElectronicos/app/js/movimientos/movimientosCtrl.js"></script>
  <script type="text/javascript" src="/edi-docElectronicos/app/js/movimientos/filtros.js"></script>
  <script type="text/javascript" src="/edi-docElectronicos/jsminificado/toArrayFilter.js"></script>
+ <!--DATEPICKER -->
+ <script type="text/javascript" src="/edi-docElectronicos/vendor/datepicker/bootstrap-datepicker.js"></script>
 
  <!--<script type="text/javascript" src="/edi-docElectronicos/jsminificado/movTypehead.min.js"></script>-->
+ <script type="text/javascript">
+     $(function(){
+    /*     PNotify.prototype.options.styling = "bootstrap3";
+         new PNotify({
+             title: 'Regular Notice',
+             text: 'Check me out! I\'m a notice.',
 
+                buttons: {
+                       closer: true,
+                       sticker: false
+                   },
+         });*/
+     });
+ </script>
  </body>
 </html>

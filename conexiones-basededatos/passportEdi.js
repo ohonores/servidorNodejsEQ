@@ -13,6 +13,7 @@ var parser = new UAParser();
 var agentOptions_;
 var log; //Variable usuarda para los logos
 var mensajesLabels;
+fechaUtils = new fechaUtils();
 /*
     Esta funcion permite la comunicacion con el WebService para realizar la autenficacion
 */
@@ -99,7 +100,7 @@ module.exports = function(passport, hostSwissEdi, postgres, LocalStrategy_,agent
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
 
-	    console.log(user);
+	   // console.log(user);
        if(user && user.id){
 			done(null, user);
 		  }else{

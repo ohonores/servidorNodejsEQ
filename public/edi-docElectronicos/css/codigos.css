@@ -486,7 +486,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endCo
 .tt-query,
 .tt-hint {
 width: 100%;
-height: 30px;
+height: 300px;
 padding: 8px 12px;
 font-size: 24px;
 line-height: 30px;
@@ -558,4 +558,22 @@ width:100% !important;
 }
 .tt-suggestion p {
 margin: 0;
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes example {
+    from {background-color: transparent;}
+    to {background-color: rgb(37, 37, 234);}
+}
+
+/* Standard syntax */
+@keyframes example {
+    from {background-color: transparent;}
+    to {background-color: rgb(37, 37, 234);}
+}
+.notif002 {
+    background-color: transparent;
+    -webkit-animation-name: example2; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 2s; /* Chrome, Safari, Opera */
+    animation-name: example2;
+    animation-duration: 2s;
 }

@@ -16,6 +16,10 @@ module.exports = function(grunt){
       typehead: {
         src:'public/edi-docElectronicos/app/js/typehead/movTypehead.js',
         dest:'public/edi-docElectronicos/jsminificado/movTypehead.min.js'
+    },
+      detectBrowser: {
+        src:'public/edi-docElectronicos/app/js/detectarBrowser/detectarBrowser.js',
+        dest:'public/edi-docElectronicos/jsminificado/detectarBrowser.js'
       }
     }
   });

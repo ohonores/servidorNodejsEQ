@@ -5,14 +5,17 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
+//Instanciamos la ruta rutasDocElectronicos
+var rutasDocElectronicos = require('./routes/publicas/docelectronicos.js');
 var movimientos = require('./routes/privadas/movimientos');
+var VariablesDeInicioRedis = require('./utils/variablesDeInicioRedis.js');
 var Promise = require('promise');
 var fs = require('fs');
 var StringDecoder = require('string_decoder').StringDecoder;
 var request = require("request");
 var methodOverride = require('method-override');
 var session  = require('express-session');
-
+var hash = require('object-hash');
 /****************
 	Passporte ingreso al sistema
 *****************/
@@ -33,7 +36,9 @@ var log = bunyan.createLogger({
 
 
 var app = express();
+app.set('port', 80);
 
+//app.set('ipaddr', "0.0.0.0");
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 
@@ -46,9 +51,7 @@ app.engine('html', require('ejs').renderFile);
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 //pp.use(logger('dev'));
 app.use(methodOverride());
-app.use(session({ resave: true,
-                  saveUninitialized: true,
-                  secret: 'alien200525' }));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -61,27 +64,108 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/recursos',express.static(path.join(__dirname, 'bower_components')));
+//app.use('/bootstrap-notify',express.static(path.join(__dirname, 'bower_components/remarkable-bootstrap-notify')));
+app.use('/pnotify',express.static(path.join(__dirname, 'bower_components/pnotify/dist')));
+app.use('/ngDialog/js',express.static(path.join(__dirname, 'bower_components/ng-dialog/js')));
+app.use('/ngDialog/css',express.static(path.join(__dirname, 'bower_components/ng-dialog/css')));
+
+
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS,ALL');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type,accept,x-requested-with,Authorization,x-access-token');
+    res.setHeader('Access-Control-Request-Headers', 'X-Requested-With,content-type, authorization, x-access-token');
+    if ('OPTIONS' == req.method) {
+      res.send(200);
+    }
+    else {
+      next();
+    }
+
+});
+
 var client;
 var redisStore;
 if(process.env.REDIS == 1){
-    log.info("Entro a redis");
     /***********
     	CONFIGURACION DE REDIS, SI NO TIENE LA BASE DE REDIS POR FAVOR COMENTAR HASTA "FIN REDIS"
     *************/
 
-    client = require("redis").createClient(6379,process.env.NODE_ENV==="development"?"192.168.1.6":"localhost");
+    client = require("ioredis").createClient(6379,process.env.NODE_ENV==="development"?"192.168.1.7":"localhost");
+    client2 = require("ioredis").createClient(6379,process.env.NODE_ENV==="development"?"192.168.1.7":"localhost");
+    client3 = require("ioredis").createClient(6379,process.env.NODE_ENV==="development"?"192.168.1.7":"localhost");
     redisStore = require('connect-redis')(session);
     client.on("error", function (err) {
-        log.info("Error " + err);
+        log.error("Error " + err);
+    });
+    client.on("connect", function () {
+     //   console.log(client)
+        log.info("Conectado a REDIS direccion: %s,puerto:%s, estado:%s",client.options.host,client.options.port, client.status);
+       // movimientos.redis = client;
+      
+    });
+     client3.on("connect", function () {
+     //   console.log(client)
+        log.info("Conectado a REDIS direccion: %s,puerto:%s, estado:%s",client.options.host,client.options.port, client.status);
+       // movimientos.redis = client;
+        /* var archivo = fs.readFileSync("C:/versionWebServiceEdi/PikaiLeerArchivo/Ecuaquimica/010-900-000003800.xml")
+        for(var i=0;i<100;i++){
+         client3.lpush('testingkey10', hash(archivo)+':::'+new Buffer(archivo))
+        }*/
+          rutasDocElectronicos.redis = client3;
+          movimientos.redis = client3;
+         /*
+            INICIANDO VARIABLES DE INICIO POR UNA SEMANA EN REDIS
+        */
+            setTimeout(function(){
+            variablesDeInicioRedis = new VariablesDeInicioRedis(client3);
+            variablesDeInicioRedis.setDocumentos();
+            variablesDeInicioRedis.setEmpresas();
+            },10000);
+    });
+    client.on("disconnect", function () {
+        log.info("Conectado a REDIS direccion: %s,puerto:%s, estado:%s",client.options.host,client.options.port, client.status);
     });
     /*********FIN REDIS**************/
     app.use(session({
         secret: 'alien200525',
-        store: new redisStore({ host: process.env.NODE_ENV==="development"?"192.168.1.6":"localhost", port: 6379,prefix:'edi', client: client,ttl :120}),
+        store: new redisStore({ host: process.env.NODE_ENV==="development"?"192.168.1.7":"localhost", port: 6379,prefix:'edi', client: client,ttl :120}),
         saveUninitialized: true,
         resave: false
     }));
+    
+   /* client.subscribe('test-channel', function (err, count) {
+       
+         console.log('Receive message %s from channel ', count);
+        var fecha = new Date();
+        for(var i=0;i<8371760;i++){
+          //  console.log(i);
+         //   client2.publish('test-channel', 'Hello world! desde node '+i);
+       }
+        var fecha2 = new Date();
+         console.log("Fin ",fecha2.getTime()-fecha.getTime() );
+    });
+    
+     for(var i=0;i<100;i++){
+            client2.publish('test-channel', 'Hello world! desde node ');
+        }
+    client.on('message', function (channel, message) {
+      // Receive message Hello world! from channel news
+      // Receive message Hello again! from channel music
+      console.log('Receive1 message %s from channel %s', message, channel);
+    });
+     client2.on('message', function (channel, message) {
+      // Receive message Hello world! from channel news
+      // Receive message Hello again! from channel music
+      console.log('Receive2 message %s from channel %s', message, channel);
+    });
+*/
+    
 }else{
+    app.use(session({ resave: true,
+                      saveUninitialized: true,
+                      secret: 'alien200525' }));
+    log.info("NO SE ESTA USANDO REDIOS PARA LAS SESIONES");
     //app.use(express.session({ secret: 'alien' }));
 
 }
@@ -158,7 +242,7 @@ function readJSON(filename, callback){
 function readJsonFiles(filenames) {
   // N.B. passing readJSON as a function, not calling it with `()`
   return Promise.all(filenames.map(readJSON));
-};
+}
 app.get('/render1', function(req, res, next) {
     //res.json([{title1: 'res vs app render'},{title2: 'res vs app render'},{title3: 'res vs app render'}]);
     //res.attachment('/plantillaQuico.pdf');
@@ -172,7 +256,7 @@ app.get('/render1', function(req, res, next) {
         readJsonFiles(['a.json', 'b.json']).done(function (results) {
           // results is an array of the values stored in a.json and b.json
         }, function (err) {
-          log.info(err)
+          log.info(err);
         });
         var p1 = Promise.resolve(3);
         var p2 = 1337;
@@ -183,7 +267,7 @@ app.get('/render1', function(req, res, next) {
           setTimeout(resolve, 1000, "p4");
           //reject("error")
         });
-        var valores = [p1,p4,p4]
+        var valores = [p1,p4,p4];
         for(var i in valores ){
           valores[i].then(function(values) {
             log.info(values); // [3, 1337, "foo"]
@@ -229,7 +313,7 @@ var redLocal = "localhost";
 var puertoLocal = "8080";
 var hostSwissEdi = redLocal+":"+puertoLocal;
 var puertoTablasTransitorias = "8081/swissedi-tablaProduccionATablasTransito";
-var puertoWS = "8444/swisedi-webService";
+var puertoWS = "8444/swisedi-webServiceoffline";
 var hostSwissEdiTablasTransitorias = redLocal+":"+puertoTablasTransitorias;
 var hostSwissEdiWS = redLocal+":"+puertoWS;
 
@@ -263,13 +347,12 @@ var mesnajeLabels = require('./utils/mensajesLabels.js');
 
 
 servletWS.instanciarVariables(hostSwissEdiWS, hostSwissEdiTablasTransitorias, agentOptions_);
-//Instanciamos la ruta rutasDocElectronicos
-var rutasDocElectronicos = require('./routes/publicas/docelectronicos.js');
 //Indicamos que la necesita de servletWS para comunicarse con el webservice
 rutasDocElectronicos.servletWS = servletWS;
 
 //INICIAMOS POSTGRES
 var postgres = require('./conexiones-basededatos/conexion-postgres.js');
+
 
 /*
   INICAMOS AUTENTIFICACION
@@ -277,10 +360,10 @@ var postgres = require('./conexiones-basededatos/conexion-postgres.js');
   que es el que se encarga de la autenficacion en conjunto con el webservice
 */
 require('./conexiones-basededatos/passportEdi.js')(passport,hostSwissEdiWS,postgres, LocalStrategy, agentOptions_,log, mesnajeLabels); // pass passport for configuration
-rutasDocElectronicos.servletWS = servletWS;
 rutasDocElectronicos.passport = passport;
 
 movimientos.log = log;
+movimientos.servletWS = servletWS;
 
 rutasDocElectronicos.use('/ver', movimientos);
 app.use('/', rutasDocElectronicos);
@@ -289,5 +372,8 @@ app.use('/', rutasDocElectronicos);
 app.get('/*', function(req, res, next){
    res.render("404/404.html");
 });
+
+
+
 
 module.exports = app;

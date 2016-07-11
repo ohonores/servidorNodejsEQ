@@ -6,6 +6,7 @@ angular.module('uiRouterDocElectronicos.services', [
 	.factory('menusDcoumentosEstados', ['$http', '$window', function ($http, $window) {
 	  	var pathMenus = '/ver/menus/:perfil';
 		var pathDocumentos = '/ver/documentos/:perfil';
+		var pathEstados = '/ver/estados/:empresa/:documento/:perfil';
 	    var menusDcoumentosEstados = {};
 		menusDcoumentosEstados.getMenus = function(callBack) {
 			if($window.usuario && $window.usuario.perfil){
@@ -26,7 +27,17 @@ angular.module('uiRouterDocElectronicos.services', [
 				callBack([]);
 			}
 
-		}
+		};
+		menusDcoumentosEstados.getEstados = function(empresa, documento, callBack) {
+			if($window.usuario && $window.usuario.perfil){
+				$http.get(pathEstados.replace(":empresa",empresa).replace(":documento",documento).replace(":perfil",$window.usuario.perfil)).then(function (resp) {
+					callBack(resp.data);
+				});
+			}else{
+				callBack([]);
+			}
+
+		};
 
 	  	return menusDcoumentosEstados;
 	}])
@@ -87,16 +98,17 @@ angular.module('uiRouterDocElectronicos.services', [
 		var tablaRegistrosFactory = {};
 		//Buscamos en el localStorage
 
-
+        
 
 		tablaRegistrosFactory.getColumnas = function (callBack) {
 
-			if($window.localStorage.getItem('__columnas__data')){
+			if($window.localStorage.getItem('__columnas__data_'+$window.usuario.id)){
 
 					try{
-						callBack(true, JSON.parse($window.localStorage.getItem('__columnas__data')));
+						callBack(true, JSON.parse($window.localStorage.getItem('__columnas__data_'+$window.usuario.id)));
+                        return;
 					}catch(error){
-						$window.localStorage.removeItem('__columnas__data');
+						$window.localStorage.removeItem('__columnas__data_'+$window.usuario.id);
 					}
 
 			}
@@ -104,7 +116,15 @@ angular.module('uiRouterDocElectronicos.services', [
 
 					switch (datos.status) {
 						case 200:
-							   $window.localStorage.setItem('__columnas__data', JSON.stringify(datos.data.columnasTablaMov));
+							  /* cols = datos.data.columnasTablaMov.filter(function(c){
+                                   console.log(c);
+                                   if(c.edi === $window.usuario.edi){
+                                       delete c.admin
+                                       return c;
+                                   }
+                               });*/
+                            //    $window.localStorage.setItem('__columnas__data_'+$window.usuario.id, JSON.stringify(datos.data.columnasTablaMov));
+                            
 							   callBack(true, datos.data.columnasTablaMov);
 						break;
 						default:
@@ -160,11 +180,40 @@ angular.module('uiRouterDocElectronicos.services', [
 		return archivoFactory;
 	}])
 
+	.factory('formatDateFactory',function(){
+		var reg = /^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/g;
+        var formatDateFactory  = {};
+	    formatDateFactory.formatDateV2 = function(d) {
+	    			  if(d instanceof Date){
+	    				return true;
+	    			  }
+	    			  if(d.split('/').length>0){
+	    				return true;
+	    			  }
+	    			  if(d.split('-').length>0){
+	    				return true;
+	    			  }
+	    			  var dd = d.slice(0,2);
 
+	    			  if ( dd.length < 2 ) dd = '0' + dd;
+	    			  var mm = d.slice(2,4);
+	    			  if ( mm.length < 2 ) mm = '0' + mm;
+	    			  var yy = d.slice(4,8);
+
+	    			  if (reg.test(dd+'/'+mm+'/'+yy)) {
+	    				return true;
+	    			  }else{
+	    				return false;
+	    			  }
+
+
+	    	};//fin this.formatDateV2
+		return formatDateFactory;
+	})
 	/***************
 		EMPRESAS CACHE
 		**************/
-		.factory('empresasFactory', ['$http','$window' , function ($http,$window) {
+	.factory('empresasFactory', ['$http','$window' , function ($http,$window) {
 				var urlBase = '/consultar/empresas/1';
 				var empresasFactory ={};
 				empresasFactory.getAllEmpresas = function (cache) {
@@ -192,9 +241,13 @@ angular.module('uiRouterDocElectronicos.services', [
 		.factory('loginFactory', ['$http','$window' , function ($http,$window) {
 			var urlLogin = '/login';
 			var urlLogout = '/ver/salir';
+            var urlRecuperacion = '/reseteo';
 			var loginFactory ={};
 			loginFactory.login = function (credenciales) {
 				return  $http.post(urlLogin, credenciales);
+			};
+            loginFactory.recuperacion = function (credenciales) {
+				return  $http.post(urlRecuperacion, credenciales);
 			};
 			loginFactory.logout = function () {
 
@@ -204,7 +257,7 @@ angular.module('uiRouterDocElectronicos.services', [
 					 $window.location.href='/';  //redirige a la pagina principal
 				 });
 				 res.error(function(data, status, headers, config) {
-					 consolse.log(data) //Error al hacer logout
+					 //consolse.log(data); //Error al hacer logout
 					 $window.notificar("Por favor int&eacute;ntelo nuevamente","error");
 				 });
 		 	};
@@ -215,3 +268,41 @@ angular.module('uiRouterDocElectronicos.services', [
 
 			return currentUsuarioMV;
 		}])
+        .factory('conexionWSocket', ['$http','$window' , function ($http,$window) {
+            var socket;
+			var conexionWSocket ={
+                                    inicio:inicio,
+                                    socket:getsocket,
+                                    recuperacionClave:recuperacionClave
+                                 };
+            
+          
+            return conexionWSocket;
+            
+            function inicio(ruc){
+                if(ruc){
+                    //socket = io($window.location.origin+"/ws-"+ruc);
+                }else{
+                    //socket = io($window.location.origin);
+                }
+                
+                
+            }
+            function getsocket(){
+                return socket;
+            }
+            
+            function recuperacionClave(){
+                 socket.emit('autenficacion',{room:"recuperacionClave"});
+            }
+            socket.on("connect", function(){
+               recuperacionClave();
+            });
+            socket.on("conectado", function(resp){
+               console.log(resp);
+            });
+            
+           
+		}]);
+
+

@@ -15,20 +15,34 @@ var http = require('http');
  /****************************************
  	SERVICIOS CON EL SERVLET DE WS
  ****************************************/
-var puertoPrincipal = {"development":{"1":{puerto:80}},"production":{"1":{puerto:8080}}};  //8080;Conauto//8084;QUI; //80; Farmagro
+var puertoPrincipal = {"development":{"1":{puerto:8084}},"production":{"1":{puerto:8084}}};  //8080;Conauto//8084;QUI; //80; Farmagro
 var port = puertoPrincipal[process.env.NODE_ENV][process.env.GRUPO].puerto;
-app.set('port', normalizePort(process.env.PORT || port ));
-app.set('ipaddr', "0.0.0.0");
+
+
 
 /**
  * Create HTTP server.
  */
 
 var server = http.createServer(app);
-
+var io = require('socket.io')(server);
 /**
  * Listen on provided port, on all network interfaces.
  */
+
+
+/**
+Creando el web socket
+*/
+var empresas = [{ruc:"0990018707001"}, {ruc:"0990018707002"}];
+var SockectServidorIO = require('../routes/socket/webSocket.js');
+var sockectServidor =  new SockectServidorIO(server, empresas);
+app.socket = sockectServidor.getSocket();
+app.conexiones = sockectServidor.getConexiones();
+app.empresas = empresas;
+/**
+ fin de la creacion del websocket
+*/
 
 server.listen(port);
 server.on('error', onError);
